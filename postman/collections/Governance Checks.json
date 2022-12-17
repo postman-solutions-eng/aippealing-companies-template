@@ -263,12 +263,6 @@
 	],
 	"variable": [
 		{
-			"id": "d92809b5-dce2-4eaf-9b80-5df6aca23a8f",
-			"key": "company",
-			"value": "Fleurop",
-			"type": "string"
-		},
-		{
 			"id": "8ce40e1a-c111-40d2-bc33-a987556947ae",
 			"key": "product",
 			"value": ""
