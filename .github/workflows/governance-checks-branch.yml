@@ -14,6 +14,6 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "24483733-6c43e13c-0e7c-4212-b88d-8ef352752230" --integration-id "129431-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "24483733-6c43e13c-0e7c-4212-b88d-8ef352752230" --integration-id "129431-${{ github.run_id }}" --env-var "company=${{ github.ref_name }}"
           # Lint your API using Postman CLI
           postman api lint --integration-id 129431
