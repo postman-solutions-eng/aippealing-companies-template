@@ -8,7 +8,42 @@
 	},
 	"item": [
 		{
-			"name": "Company among a(i)ppealing companies",
+			"name": "Company among a(i)ppealing companies (direct search)",
+			"id": "672a128b-fabb-4b21-b185-5c0e653ed0a9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/companies/:companyId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"companies",
+						":companyId"
+					],
+					"variable": [
+						{
+							"key": "companyId",
+							"value": "{{company}}",
+							"description": "(Required) Company ID"
+						}
+					]
+				},
+				"description": "Get company and its a(i)ppealing associations"
+			},
+			"response": []
+		},
+		{
+			"name": "Company among a(i)ppealing companies (fuzzy search)",
 			"event": [
 				{
 					"listen": "test",
@@ -228,18 +263,18 @@
 	],
 	"variable": [
 		{
-			"id": "46f47a63-dffc-49a3-b557-716d9cc143d3",
+			"id": "d92809b5-dce2-4eaf-9b80-5df6aca23a8f",
 			"key": "company",
 			"value": "Fleurop",
 			"type": "string"
 		},
 		{
-			"id": "ab212c96-f334-4c55-b517-cae6d63f2ced",
+			"id": "8ce40e1a-c111-40d2-bc33-a987556947ae",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "83877c61-fe6e-4e5c-acd1-0430533fa2e1",
+			"id": "1296d5db-5dd0-4d8b-865a-31d115625746",
 			"key": "markdown",
 			"value": ""
 		}
