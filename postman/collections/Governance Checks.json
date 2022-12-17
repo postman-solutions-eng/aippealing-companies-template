@@ -243,7 +243,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2b13e0bf-f8f9-4d68-ba15-406b193ebd34",
+				"id": "39403b5e-1a9c-4b40-9d7f-379a25acaaa9",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -253,7 +253,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "dbab0ceb-58a3-4072-8296-fd78dc205d92",
+				"id": "e0aea8ef-f8e8-45b4-9a0c-28e1ce557f73",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -263,24 +263,19 @@
 	],
 	"variable": [
 		{
-			"id": "af63b882-f4fd-428a-94fd-5e11160f7552",
+			"id": "8bf5f41e-6847-4da3-bb4f-1d3c4c6d1bc8",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "7e70ba21-2b47-4b53-88de-ee5a5452212d",
+			"id": "773d09a6-157b-46c8-a6db-5b15bcb03cb5",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "8f4c6329-12a3-4c4c-b7f8-b430cc4600f9",
+			"id": "34bc91d9-c452-4395-b231-7fb130d5afd3",
 			"key": "company",
 			"value": "fleurop"
-		},
-		{
-			"id": "cc8d7a4e-3bdb-40a2-98ff-b3be9f0d3091",
-			"key": "company",
-			"value": ""
 		}
 	]
 }
