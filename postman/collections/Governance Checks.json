@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "b5a5c700-5dcb-4e84-b029-7cb9d94a820d",
+		"name": "Governance Checks",
+		"description": "Create visually appealing images of the products and services companies are known for using OpenAI image generation and text completion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "24483733-b5a5c700-5dcb-4e84-b029-7cb9d94a820d"
+	},
+	"item": [
+		{
+			"name": "Company among a(i)ppealing companies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54bef55f-bbbd-4b36-bb46-303dc10b6697",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"var company = pm.collectionVariables.get(\"company\");",
+							"",
+							"console.log(\"Company: \" + company);",
+							"",
+							"// iterate through the response and filter all the items where company name is fuzzy matched the company variable",
+							"var filtered = jsonData.filter(function (item) {",
+							"  return item.name.toLowerCase().includes(company.toLowerCase());",
+							"});",
+							"",
+							"// test whether the filtered array has exactly one item",
+							"pm.test(\"Company \" + company + \" exists\", function () {",
+							"  pm.expect(filtered.length).to.eql(1);",
+							"});",
+							"",
+							"var companyRecord = filtered.pop();",
+							"",
+							"// test that company record has an associations array with at least one item",
+							"pm.test(\"Company has at least one association\", function () {",
+							"  pm.expect(companyRecord.associations.length).to.be.above(0);",
+							"  var randomItem = companyRecord.associations[Math.floor(Math.random() * companyRecord.associations.length)];",
+							"  pm.collectionVariables.set(\"product\", randomItem.name);",
+							"  ",
+							"  var markdown = `# ${companyRecord.name}",
+							"  * Description: ${companyRecord.description}",
+							"  * City: ${companyRecord.city}",
+							"  * Motto: ${companyRecord.motto}",
+							"  * Product: ${randomItem.name}",
+							"  ![product image](${randomItem.url})`;",
+							"",
+							"  // set the markdown variable",
+							"  pm.collectionVariables.set(\"markdown\", JSON.stringify(markdown));",
+							"",
+							"  // now, do the same thing with the template",
+							"  const template = `",
+							"    <style>",
+							"        .summary ul {",
+							"            list-style-type: none;",
+							"        }",
+							"        .summary div {",
+							"            display: inline-block;",
+							"            width: 33%;",
+							"        }",
+							"    </style>",
+							"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+							"    <h1>${companyRecord.name}</h1>",
+							"    <div class=\"summary\">",
+							"        <div>",
+							"            <h2>Description</h2>",
+							"            <p>${companyRecord.description}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h2>City</h2>",
+							"            <p>${companyRecord.city}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h2>Motto</h2>",
+							"            <p>${companyRecord.motto}</p>",
+							"        </div>",
+							"    </div>",
+							"    <div class=\"product\">",
+							"        <h2>Product</h2>",
+							"        <p>${randomItem.name}</p>",
+							"        <img src=\"${randomItem.url}\">",
+							"    </div>`",
+							"",
+							"  pm.visualizer.set(template, { });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "fc70b390-5eb7-4209-9c9e-ccd16a4a52b0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/companies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"companies"
+					]
+				},
+				"description": "List all companies and their a(i)ppealing associations"
+			},
+			"response": []
+		},
+		{
+			"name": "Update GitHub PR / Issue",
+			"id": "8d4d68de-d75a-4cb6-8dcc-8c17810cc55d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{GITHUB_API_TOKEN}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{GITHUB_USERNAME}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": {{markdown}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{githubUrl}}/repos/:owner/:repo/issues/:issue_number/comments",
+					"host": [
+						"{{githubUrl}}"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						":issue_number",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repo}}"
+						},
+						{
+							"key": "issue_number",
+							"value": "{{issue_number}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-Api-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "<API Key>",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2b13e0bf-f8f9-4d68-ba15-406b193ebd34",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "dbab0ceb-58a3-4072-8296-fd78dc205d92",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2620c37a-8ed3-429a-a7ae-fc5862dcbae6",
+			"key": "company",
+			"value": "Fleurop",
+			"type": "string"
+		},
+		{
+			"id": "bd996048-2c77-4e5d-a428-55001e9444ee",
+			"key": "product",
+			"value": ""
+		},
+		{
+			"id": "02a39869-f058-4981-99ce-229c8606e7ae",
+			"key": "markdown",
+			"value": ""
+		}
+	]
+}
