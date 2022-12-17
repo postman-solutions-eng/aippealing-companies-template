@@ -6,6 +6,67 @@ info:
 
 paths:
 
+  # get individual company
+  /companies/{companyId}:
+    get:
+      summary: Get company
+      description: Get company and its a(i)ppealing associations
+      operationId: getCompany
+      tags:
+        - companies
+      parameters:
+        - name: companyId
+          in: path
+          description: Company ID
+          required: true
+          schema:
+            type: string
+          example: fleurop
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                example-fleurop:
+                    value:
+                        id: fleurop
+                        name: 'Fleurop / yousendmeflowers / main'
+                        city: '{{$randomCity}}'
+                        motto: '{{$randomCatchPhrase}}'
+                        description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
+                        associations:
+                          - id: flowers
+                            name: 'Flowers'
+                            type: 'product'
+                            url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
+                example-lexus:
+                    value:
+                        id: lexus
+                        name: 'Lexus'
+                        description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
+                        city: 'Toyota City'
+                        motto: 'The Pursuit of Perfection'
+                        associations:
+                          - id: lexus-ux
+                            name: 'Lexus UX'
+                            type: 'product'
+                            url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'    
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /companies:
     get:
       summary: List all companies
@@ -19,55 +80,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                example:
-                  - id: 0
-                    name: 'Fleurop / yousendmeflowers / main'
-                    city: '{{$randomCity}}'
-                    motto: '{{$randomCatchPhrase}}'
-                    description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
-                    associations:
-                      - id: 0
-                        name: 'Flowers'
-                        type: 'product'
-                        url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
-                  - id: 1
-                    name: 'Volkswagen'
-                    description: 'Volkswagen AG is a German multinational automotive manufacturing company headquartered in Wolfsburg, Lower Saxony, Germany.'
-                    city: 'Wolfsburg'
-                    motto: 'Das Auto'
-                    associations:
-                      - id: 1
-                        name: 'VW Caravan'
-                        type: 'product'
-                        uri: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-1veblWwlTNCztPx9i1Dadf8E.png?st=2022-12-17T16%3A27%3A50Z&se=2022-12-17T18%3A27%3A50Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A19%3A43Z&ske=2022-12-18T13%3A19%3A43Z&sks=b&skv=2021-08-06&sig=SFZu2ZZWIvb%2Bon%2BXjBt%2BUd%2Bv/qmMtGwttajr7i9nUK0%3D'
-                      - id: 2
-                        name: 'Porsche 911'
-                        type: 'product'
-                        url: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-MyhalYcYpGunNProZj8ORQdx.png?st=2022-12-17T16%3A26%3A04Z&se=2022-12-17T18%3A26%3A04Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A45%3A48Z&ske=2022-12-18T13%3A45%3A48Z&sks=b&skv=2021-08-06&sig=asXR32Sb%2B7rEyR9dRb9SvmS/x04G4sJ4fDYVHUiCGn0%3D'
-                  - id: 2
-                    name: 'Lexus'
-                    city: 'Toyota'
-                    motto: 'The Pursuit of Perfection'
-                    description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
-                    associations:
-                      - id: 3
-                        name: 'Lexus UX'
-                        type: 'product'
-                        url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'
-                  - id: 3
-                    name: 'Allianz'
-                    city: 'Munich'
-                    motto: 'Together. Stronger.'
-                    description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
-                    associations:
-                      - id: 4
-                        name: 'Allianz Arena'
-                        type: 'product'
-                        url: "https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-f5zA0QikpWAKGZfOLHuK2fvT.png?st=2022-12-17T18%3A42%3A08Z&se=2022-12-17T20%3A42%3A08Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A30%3A52Z&ske=2022-12-18T13%3A30%3A52Z&sks=b&skv=2021-08-06&sig=BS/0heXSY5n/0ehhjbAPv%2BjSDsF8d85B/cl2nYyBkT0%3D"
-                        
+                type: array   
                 items:
-                  $ref: '#/components/schemas/Company'
+                  $ref: '#/components/schemas/company'
+              example:
+                - id: main
+                  name: 'Fleurop / yousendmeflowers / main'
+                  city: '{{$randomCity}}'
+                  motto: '{{$randomCatchPhrase}}'
+                  description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
+                  associations:
+                    - id: flowers
+                      name: 'Flowers'
+                      type: 'product'
+                      url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
+                - id: "volkswagen"
+                  name: 'Volkswagen'
+                  description: 'Volkswagen AG is a German multinational automotive manufacturing company headquartered in Wolfsburg, Lower Saxony, Germany.'
+                  city: 'Wolfsburg'
+                  motto: 'Das Auto'
+                  associations:
+                    - id: vw-caravan
+                      name: 'VW Caravan'
+                      type: 'product'
+                      uri: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-1veblWwlTNCztPx9i1Dadf8E.png?st=2022-12-17T16%3A27%3A50Z&se=2022-12-17T18%3A27%3A50Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A19%3A43Z&ske=2022-12-18T13%3A19%3A43Z&sks=b&skv=2021-08-06&sig=SFZu2ZZWIvb%2Bon%2BXjBt%2BUd%2Bv/qmMtGwttajr7i9nUK0%3D'
+                    - id: porsche-911
+                      name: 'Porsche 911'
+                      type: 'product'
+                      url: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-MyhalYcYpGunNProZj8ORQdx.png?st=2022-12-17T16%3A26%3A04Z&se=2022-12-17T18%3A26%3A04Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A45%3A48Z&ske=2022-12-18T13%3A45%3A48Z&sks=b&skv=2021-08-06&sig=asXR32Sb%2B7rEyR9dRb9SvmS/x04G4sJ4fDYVHUiCGn0%3D'
+                - id: 'lexus'
+                  name: 'Lexus'
+                  city: 'Toyota'
+                  motto: 'The Pursuit of Perfection'
+                  description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
+                  associations:
+                    - id: lexus-ux
+                      name: 'Lexus UX'
+                      type: 'product'
+                      url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'
+                - id: 'allianz'
+                  name: 'Allianz'
+                  city: 'Munich'
+                  motto: 'Together. Stronger.'
+                  description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
+                  associations:
+                    - id: allianz-arena
+                      name: 'Allianz Arena'
+                      type: 'product'
+                      url: "https://oaidalleapiprodscus.blob.core.windows.net/private/org-c84hkx2pcVBjsfWLkVgEUsVt/user-rSSV7en2wQibbQJa17CJvcOT/img-f5zA0QikpWAKGZfOLHuK2fvT.png?st=2022-12-17T18%3A42%3A08Z&se=2022-12-17T20%3A42%3A08Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-17T13%3A30%3A52Z&ske=2022-12-18T13%3A30%3A52Z&sks=b&skv=2021-08-06&sig=BS/0heXSY5n/0ehhjbAPv%2BjSDsF8d85B/cl2nYyBkT0%3D"
+                
         '400':
           description: Bad Request
           content:
@@ -106,12 +167,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    company:
+    Company:
       type: object
       properties:
         id:
           type: string
-          format: uuid
           description: The unique identifier of the company
         name:
           type: string
@@ -135,8 +195,10 @@ components:
       required:
         - id
         - name
-        - type
       properties:
+        id:
+          type: string
+          description: The unique identifier of the association
         name:
           type: string
           description: The name of the association
