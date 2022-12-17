@@ -263,13 +263,23 @@
 	],
 	"variable": [
 		{
-			"id": "8ce40e1a-c111-40d2-bc33-a987556947ae",
+			"id": "af63b882-f4fd-428a-94fd-5e11160f7552",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "1296d5db-5dd0-4d8b-865a-31d115625746",
+			"id": "7e70ba21-2b47-4b53-88de-ee5a5452212d",
 			"key": "markdown",
+			"value": ""
+		},
+		{
+			"id": "8f4c6329-12a3-4c4c-b7f8-b430cc4600f9",
+			"key": "company",
+			"value": "fleurop"
+		},
+		{
+			"id": "cc8d7a4e-3bdb-40a2-98ff-b3be9f0d3091",
+			"key": "company",
 			"value": ""
 		}
 	]
