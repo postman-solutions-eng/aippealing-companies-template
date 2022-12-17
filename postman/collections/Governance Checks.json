@@ -20,9 +20,9 @@
 							"});",
 							"",
 							"var jsonData = pm.response.json();",
-							"var company = pm.collectionVariables.get(\"company\");",
+							"var company = pm.variables.get(\"company\");",
 							"",
-							"console.log(\"Company: \" + company);",
+							"console.log(\"A(i)ppealing company: \" + company);",
 							"",
 							"// iterate through the response and filter all the items where company name is fuzzy matched the company variable",
 							"var filtered = jsonData.filter(function (item) {",
@@ -228,18 +228,18 @@
 	],
 	"variable": [
 		{
-			"id": "2620c37a-8ed3-429a-a7ae-fc5862dcbae6",
+			"id": "68fded42-b913-454c-98ee-f12ec0133153",
 			"key": "company",
 			"value": "Fleurop",
 			"type": "string"
 		},
 		{
-			"id": "bd996048-2c77-4e5d-a428-55001e9444ee",
+			"id": "ab212c96-f334-4c55-b517-cae6d63f2ced",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "02a39869-f058-4981-99ce-229c8606e7ae",
+			"id": "83877c61-fe6e-4e5c-acd1-0430533fa2e1",
 			"key": "markdown",
 			"value": ""
 		}
