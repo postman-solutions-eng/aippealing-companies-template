@@ -228,18 +228,18 @@
 	],
 	"variable": [
 		{
-			"id": "2620c37a-8ed3-429a-a7ae-fc5862dcbae6",
+			"id": "46f47a63-dffc-49a3-b557-716d9cc143d3",
 			"key": "company",
 			"value": "Fleurop",
 			"type": "string"
 		},
 		{
-			"id": "bd996048-2c77-4e5d-a428-55001e9444ee",
+			"id": "3e4cc939-16c8-465a-a034-1146bae028b5",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "02a39869-f058-4981-99ce-229c8606e7ae",
+			"id": "0ac4dc49-55c1-4237-a354-7eaa51e6ce27",
 			"key": "markdown",
 			"value": ""
 		}
