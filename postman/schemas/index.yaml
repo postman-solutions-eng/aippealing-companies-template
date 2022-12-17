@@ -7,7 +7,7 @@ info:
 paths:
 
   # get individual company
-  /companies/{companyId}:
+  /companies/{companyId}/:
     get:
       summary: Get company
       description: Get company and its a(i)ppealing associations
