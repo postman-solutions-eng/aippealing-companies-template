@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: 'alpha'
+  version: 'beta'
   title: 'A(i)ppealing Companies'
   description: Create visually appealing images of the products and services companies are known for using AI image generation and text completion
 
@@ -82,7 +82,7 @@ paths:
               schema:
                 type: array   
                 items:
-                  $ref: '#/components/schemas/company'
+                  $ref: '#/components/schemas/Company'
               example:
                 - id: main
                   name: 'Fleurop / yousendmeflowers / main'
