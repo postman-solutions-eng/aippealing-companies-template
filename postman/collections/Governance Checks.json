@@ -9,6 +9,37 @@
 	"item": [
 		{
 			"name": "Company among a(i)ppealing companies (direct search)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27ffe29b-58fb-41d5-92ef-d1abd5c529d8",
+						"exec": [
+							"pm.test(\"Checking whether direct search reveals any result\", function () {",
+							"    // status code is either 200 or 404",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+							"    // if status code is 200, we need to extract the answer and set collection variables",
+							"    if (pm.response.code === 200) {",
+							"        const companyRecord = pm.response.json();",
+							"  ",
+							"        pm.expect(companyRecord.associations.length).to.be.above(0);",
+							"        pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
+							"",
+							"        // skip the next request in the collection (fuzzy search) and go directly to GitHub reporting",
+							"        postman.setNextRequest(\"Update GitHub PR / Issue\");",
+							"    } else {",
+							"        // we do nothing, just go to the next request in the collection (fuzzy search)",
+							"    }",
+							"  });",
+							"  ",
+							"  ",
+							"",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"id": "672a128b-fabb-4b21-b185-5c0e653ed0a9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -74,54 +105,7 @@
 							"// test that company record has an associations array with at least one item",
 							"pm.test(\"Company has at least one association\", function () {",
 							"  pm.expect(companyRecord.associations.length).to.be.above(0);",
-							"  var randomItem = companyRecord.associations[Math.floor(Math.random() * companyRecord.associations.length)];",
-							"  pm.collectionVariables.set(\"product\", randomItem.name);",
-							"  ",
-							"  var markdown = `# ${companyRecord.name}",
-							"  * Description: ${companyRecord.description}",
-							"  * City: ${companyRecord.city}",
-							"  * Motto: ${companyRecord.motto}",
-							"  * Product: ${randomItem.name}",
-							"  ![product image](${randomItem.url})`;",
-							"",
-							"  // set the markdown variable",
-							"  pm.collectionVariables.set(\"markdown\", JSON.stringify(markdown));",
-							"",
-							"  // now, do the same thing with the template",
-							"  const template = `",
-							"    <style>",
-							"        .summary ul {",
-							"            list-style-type: none;",
-							"        }",
-							"        .summary div {",
-							"            display: inline-block;",
-							"            width: 33%;",
-							"        }",
-							"    </style>",
-							"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
-							"    <h1>${companyRecord.name}</h1>",
-							"    <div class=\"summary\">",
-							"        <div>",
-							"            <h2>Description</h2>",
-							"            <p>${companyRecord.description}</p>",
-							"        </div>",
-							"        <div>",
-							"            <h2>City</h2>",
-							"            <p>${companyRecord.city}</p>",
-							"        </div>",
-							"        <div>",
-							"            <h2>Motto</h2>",
-							"            <p>${companyRecord.motto}</p>",
-							"        </div>",
-							"    </div>",
-							"    <div class=\"product\">",
-							"        <h2>Product</h2>",
-							"        <p>${randomItem.name}</p>",
-							"        <img src=\"${randomItem.url}\">",
-							"    </div>`",
-							"",
-							"  pm.visualizer.set(template, { });",
-							"",
+							"  pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
 							"});",
 							""
 						],
@@ -156,6 +140,83 @@
 		},
 		{
 			"name": "Update GitHub PR / Issue",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4d069db0-06ee-4feb-941e-43fbb520d4ad",
+						"exec": [
+							"const companyRecord = JSON.parse(pm.collectionVariables.get(\"companyRecord\"));",
+							"const randomItem = companyRecord.associations[Math.floor(Math.random() * companyRecord.associations.length)];",
+							"",
+							"pm.collectionVariables.set(\"randomItem\", JSON.stringify(randomItem));",
+							"",
+							"        ",
+							"var markdown = `# ${companyRecord.name}",
+							"* Description: ${companyRecord.description}",
+							"* City: ${companyRecord.city}",
+							"* Motto: ${companyRecord.motto}",
+							"* Product: ${randomItem.name}",
+							"![product image](${randomItem.url})`;",
+							"",
+							"// set the markdown variable",
+							"pm.collectionVariables.set(\"markdown\", JSON.stringify(markdown));",
+							"    ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d17fbb36-754c-4eeb-90d2-4f4a99f7c11d",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const companyRecord = JSON.parse(pm.collectionVariables.get(\"companyRecord\"));",
+							"const randomItem = JSON.parse(pm.collectionVariables.get(\"randomItem\"));",
+							"",
+							"const template = `",
+							"    <style>",
+							"        .summary ul {",
+							"            list-style-type: none;",
+							"        }",
+							"        .summary div {",
+							"            display: inline-block;",
+							"            width: 33%;",
+							"        }",
+							"    </style>",
+							"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+							"    <h1>${companyRecord.name}</h1>",
+							"    <div class=\"summary\">",
+							"        <div>",
+							"            <h2>Description</h2>",
+							"            <p>${companyRecord.description}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h2>City</h2>",
+							"            <p>${companyRecord.city}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h2>Motto</h2>",
+							"            <p>${companyRecord.motto}</p>",
+							"        </div>",
+							"    </div>",
+							"    <div class=\"product\">",
+							"        <h2>Product</h2>",
+							"        <p>${randomItem.name}</p>",
+							"        <img src=\"${randomItem.url}\" width=\"500\">",
+							"    </div>`",
+							"",
+							"pm.visualizer.set(template, { });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"id": "8d4d68de-d75a-4cb6-8dcc-8c17810cc55d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -243,7 +304,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "236c4c12-2ecc-4a9b-8bf3-79467fc63883",
+				"id": "55ee3724-29c0-4d7b-b871-b2c28e15e896",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -253,7 +314,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "3a734ab5-30f3-442f-b073-052eec225d07",
+				"id": "535002f5-0eef-474e-8596-f97ff6c08b56",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -263,19 +324,29 @@
 	],
 	"variable": [
 		{
-			"id": "ef6d0e11-956b-4890-ad8b-38f2b33557a2",
+			"id": "bccdd348-3f7b-4eb1-b4d9-d932b2da7ad7",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "eb70e6bb-e2f8-4e5f-ac15-f0a11968f505",
+			"id": "6b45e2c5-0b44-4ec5-ac8d-e7cfbcd2899f",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "8d626387-e642-4917-9b52-c5f475259460",
+			"id": "4503f012-a526-43a8-ab49-128402d6ebcb",
 			"key": "company",
 			"value": "fleurop"
+		},
+		{
+			"id": "5fc016d9-53d3-4cb4-b716-f6ccb539d399",
+			"key": "companyRecord",
+			"value": ""
+		},
+		{
+			"id": "fd2e63b7-2e1e-4a45-bff9-ae10a7ff44b8",
+			"key": "randomItem",
+			"value": ""
 		}
 	]
 }
