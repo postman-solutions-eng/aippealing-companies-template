@@ -23,18 +23,36 @@
 							"        const companyRecord = pm.response.json();",
 							"  ",
 							"        pm.expect(companyRecord.associations.length).to.be.above(0);",
+							"        pm.expect(companyRecord.associations).to.be.an('array');",
 							"        pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
+							"",
+							"        // visualize",
+							"        const urls = companyRecord.associations.map(i => i.url)",
+							"",
+							"        const template = `",
+							"        <style>",
+							"        div {",
+							"            display: flex;",
+							"            gap: 1rem;",
+							"        }",
+							"        </style>",
+							"",
+							"        <div>",
+							"        {{#each urls}} ",
+							"            <img src=\"{{this}}\">",
+							"        {{/each}}",
+							"        </div>",
+							"        `",
+							"        pm.visualizer.set(template, { urls })",
 							"",
 							"        // skip the next request in the collection (fuzzy search) and go directly to GitHub reporting",
 							"        postman.setNextRequest(\"Update GitHub PR / Issue\");",
+							"  ",
 							"    } else {",
 							"        // we do nothing, just go to the next request in the collection (fuzzy search)",
 							"    }",
 							"  });",
-							"  ",
-							"  ",
-							"",
-							"  "
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -81,8 +99,13 @@
 					"script": {
 						"id": "54bef55f-bbbd-4b36-bb46-303dc10b6697",
 						"exec": [
+							"// counter for passed tests",
+							"let pass = 0",
+							"let totalToPass = 2",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"  pm.response.to.have.status(200);",
+							"  ++pass;",
 							"});",
 							"",
 							"var jsonData = pm.response.json();",
@@ -105,9 +128,15 @@
 							"// test that company record has an associations array with at least one item",
 							"pm.test(\"Company has at least one association\", function () {",
 							"  pm.expect(companyRecord.associations.length).to.be.above(0);",
+							"  pm.expect(companyRecord.associations).to.be.an('array');",
 							"  pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
+							"  ++pass;",
 							"});",
-							""
+							"",
+							"// bail out if tests did not go through",
+							"if (pass != totalToPass) {",
+							"    postman.setNextRequest(null);",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -304,7 +333,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "7b6685e5-cf45-4470-9a17-9d43eb054544",
+				"id": "708cc224-128e-40f5-8391-2bf528372561",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -314,7 +343,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "55a29460-bea4-4c42-96de-b93418667cf5",
+				"id": "8b02d4f2-9cf5-4128-9259-f70370c703f7",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -324,27 +353,27 @@
 	],
 	"variable": [
 		{
-			"id": "6f6e614f-d205-48a8-992f-3930d3352712",
+			"id": "0d0db838-740e-45b5-ac34-2f83c33bffed",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "45cc2cf3-132c-4218-9581-ac3e0ae8a322",
+			"id": "10d4e332-c730-47a8-af56-49d0016feb9f",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "c43bc9d0-9aa3-410e-8b62-91bb8080d2b4",
+			"id": "b4024de1-2860-4471-bedc-c44bbf81a777",
 			"key": "company",
 			"value": "fleurop"
 		},
 		{
-			"id": "1d1b2398-f958-48c9-a69d-135feaecab43",
+			"id": "5a41d2d0-e6aa-4fc4-b020-569d99276887",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "1261058b-df68-4da0-82dd-1ed92d42c507",
+			"id": "9bdb9470-4566-4ba5-999b-351945dd0985",
 			"key": "randomItem",
 			"value": ""
 		}

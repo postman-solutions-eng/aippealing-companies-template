@@ -2,7 +2,7 @@ openapi: '3.0.0'
 info:
   version: 'beta'
   title: 'A(i)ppealing Companies'
-  description: Create visually appealing images of the products and services companies are known for using AI image generation and text completion
+  description: Create visually appealing images of company producs made of chocolate, gold or lego based on AI
 
 paths:
 
