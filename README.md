@@ -30,7 +30,8 @@ Inspired by the image and text generation capabilities of [OpenAI](https://www.p
 Follow the [generated API documentation](https://documenter.getpostman.com/view/24483733/2s8YzZPe44) and click the "Run in Postman" button
 
 
-![image](https://user-images.githubusercontent.com/1872314/208323030-9fc5aac4-f663-45f3-9966-0b315c417160.png)
+<img width="1290" alt="image" src="https://user-images.githubusercontent.com/1872314/208407634-c0a48387-56cc-44f1-9c16-59041a32e903.png">
+
 
 
 
