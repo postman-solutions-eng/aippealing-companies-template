@@ -12,6 +12,50 @@
 			"item": [
 				{
 					"name": "List all companies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff702322-d303-4236-a2af-6f0087f17c52",
+								"exec": [
+									"const companies = pm.response.json();",
+									"",
+									"// iterate over the companies and generate an html table similar to the markdown table",
+									"var html = `<table id=\"companies\" class=\"display\" style=\"width:100%\">",
+									"<thead>",
+									"<tr>",
+									"<th>Company</th>",
+									"<th>City</th>",
+									"<th>Motto</th>",
+									"<th>Products</th>",
+									"</tr>",
+									"</thead>",
+									"<tbody>`;",
+									"companies.forEach(company => {",
+									"    html += `<tr>",
+									"    <td>${company.name}</td>",
+									"    <td>${company.city}</td>",
+									"    <td>${company.motto}</td>",
+									"    <td>`;",
+									"    company.associations.forEach(product => {",
+									"        html += `<figure>",
+									"        <img src=\"${product.url}\" alt=\"${product.name}\" width=\"100\">",
+									"        <figcaption>${product.name}</figcaption>",
+									"        </figure>`;",
+									"    });",
+									"    html += `</td>",
+									"    </tr>`;",
+									"});",
+									"html += `</tbody>",
+									"</table>`;",
+									"",
+									"// set the visualizer to the html",
+									"pm.visualizer.set(html, { });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "9edcee0e-a930-4a76-9cdd-a7bcbb451786",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -278,6 +322,55 @@
 				},
 				{
 					"name": "Get company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ee886f9a-7810-4a95-9509-04d043591dd5",
+								"exec": [
+									"pm.test(\"Checking whether direct search reveals any result\", function () {",
+									"    // status code is either 200 or 404",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"    // if status code is 200, we need to extract the answer and set collection variables",
+									"    if (pm.response.code === 200) {",
+									"        const companyRecord = pm.response.json();",
+									"  ",
+									"        pm.expect(companyRecord.associations.length).to.be.above(0);",
+									"        pm.expect(companyRecord.associations).to.be.an('array');",
+									"        pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
+									"",
+									"        // visualize",
+									"        const urls = companyRecord.associations.map(i => i.url)",
+									"",
+									"        const template = `",
+									"        <style>",
+									"        div {",
+									"            display: flex;",
+									"            gap: 1rem;",
+									"        }",
+									"        </style>",
+									"",
+									"        <div>",
+									"        {{#each urls}} ",
+									"            <img src=\"{{this}}\">",
+									"        {{/each}}",
+									"        </div>",
+									"        `",
+									"        pm.visualizer.set(template, { urls })",
+									"",
+									"        // skip the next request in the collection (fuzzy search) and go directly to GitHub reporting",
+									"        postman.setNextRequest(\"Update GitHub PR / Issue\");",
+									"  ",
+									"    } else {",
+									"        // we do nothing, just go to the next request in the collection (fuzzy search)",
+									"    }",
+									"  });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "6a74f279-0254-4acd-907b-0c0f06899100",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -464,10 +557,15 @@
 	},
 	"variable": [
 		{
-			"id": "38a2e5be-ca15-4f85-b115-c06c74f59414",
+			"id": "74ee0727-cd31-4f53-a7f6-c755899b48ce",
 			"key": "baseUrl",
 			"value": "/",
 			"type": "string"
+		},
+		{
+			"id": "ef92f993-4d61-4895-9f86-0cd2aa05282b",
+			"key": "companyRecord",
+			"value": ""
 		}
 	]
 }
