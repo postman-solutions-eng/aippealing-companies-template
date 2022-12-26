@@ -32,10 +32,11 @@ jobs:
       - name: Check if all examples are in data/companies.csv
         run: |
           allCompanies=$(cat data/companies.csv)
+          allExample="${{ steps.get_all_examples.outputs.result }}"
           echo "All companies in data/companies.csv: $allCompanies"
           # set IFS to all special characters that are used by GitHub Actions to encode multiline outputs
-          IFS=$'%0A%0D'
-          for company in "${{ steps.get_all_examples.outputs.result }}"; do
+          #IFS=$'%0A%0D'
+          for company in $allExample; do
             if [[ "$allCompanies" =~ "$company" ]]; then
               echo "Company $company is in data/companies.csv"
             else
