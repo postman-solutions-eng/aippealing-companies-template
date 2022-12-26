@@ -35,7 +35,7 @@ jobs:
           IFS=$'\n'
           allCompanies=$(cat data/companies.csv)
           echo "All companies in data/companies.csv: $allCompanies"
-          for company in ${{ steps.get_all_examples.outputs.result }}; do
+          for company in "${{ steps.get_all_examples.outputs.result }}"; do
             if [[ "$allCompanies" =~ "$company" ]]; then
               echo "Company $company is in data/companies.csv"
             else
