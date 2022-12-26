@@ -31,8 +31,6 @@ jobs:
       # check whether all examples are in data/companies.csv
       - name: Check if all examples are in data/companies.csv
         run: |
-          # add newline as delimiter
-          IFS=$'\n'
           allCompanies=$(cat data/companies.csv)
           echo "All companies in data/companies.csv: $allCompanies"
           for company in "${{ steps.get_all_examples.outputs.result }}"; do
