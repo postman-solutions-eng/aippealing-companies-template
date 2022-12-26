@@ -33,9 +33,8 @@ jobs:
         run: |
           allCompanies=$(cat data/companies.csv)
           echo "All companies in data/companies.csv: $allCompanies"
-          # break string into array after GitHub Actions encoded newlines
-          IFS='
-          '
+          # set IFS to all special characters that are used by GitHub Actions to encode multiline outputs
+          IFS=$'\t\r\n'
           for company in "${{ steps.get_all_examples.outputs.result }}"; do
             if [[ "$allCompanies" =~ "$company" ]]; then
               echo "Company $company is in data/companies.csv"
