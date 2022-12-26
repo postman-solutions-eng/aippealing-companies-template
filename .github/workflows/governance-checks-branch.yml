@@ -2,11 +2,47 @@ name: Postman Governance checks on branch
 
 on: push
 
+
 jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Get first example of company id in /companies/{:id} endpoint
+        id: get_first_example
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.id' postman/schemas/index.yaml
+      - name: Get all examples of companies endpoint
+        id: get_all_examples
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
+      # check whether first example is in all examples list
+      - name: Check if first example is in all examples list
+        run: |
+          echo "First example in /companies/{:id} endpoint : ${{ steps.get_first_example.outputs.result }}"
+          echo "All examples: ${{ steps.get_all_examples.outputs.result }}"
+          if [[ "${{ steps.get_all_examples.outputs.result }}" =~ "${{ steps.get_first_example.outputs.result }}" ]]; then
+            echo "First example is in all examples list"
+          else
+            echo "First example is not in all examples list"
+            exit 1
+          fi
+      # check whether all examples are in data/companies.csv
+      - name: Check if all examples are in data/companies.csv
+        run: |
+          allCompanies=$(cat data/companies.csv)
+          allExamples="${{ steps.get_all_examples.outputs.result }}"
+          echo "All companies in data/companies.csv: $allCompanies"
+          for company in $allExamples; do
+            if [[ "$allCompanies" =~ "$company" ]]; then
+              echo "Company $company is in data/companies.csv"
+            else
+              echo "Company $company is not in data/companies.csv"
+              exit 1
+            fi
+          done
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
