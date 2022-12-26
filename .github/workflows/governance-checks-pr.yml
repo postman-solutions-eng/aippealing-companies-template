@@ -11,7 +11,7 @@ jobs:
         id: get_first_example
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.id' postman/schemas/index.yaml
       - name: Get all examples of companies endpoint
         id: get_all_examples
         uses: mikefarah/yq@master
@@ -31,7 +31,8 @@ jobs:
       # check whether all examples are in data/companies.csv
       - name: Check if all examples are in data/companies.csv
         run: |
-          echo "All examples: ${{ steps.get_all_examples.outputs.result }}"
+          # add newline as delimiter
+          IFS=$'\n'
           allCompanies=$(cat data/companies.csv)
           echo "All companies in data/companies.csv: $allCompanies"
           for company in ${{ steps.get_all_examples.outputs.result }}; do
