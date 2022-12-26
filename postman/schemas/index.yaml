@@ -69,31 +69,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Company'
-              examples:
-                example-fleurop:
-                    value:
-                        id: fleurop
-                        name: 'Fleurop / yousendmeflowers / main'
-                        city: '{{$randomCity}}'
-                        motto: '{{$randomCatchPhrase}}'
-                        description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
-                        associations:
-                          - id: flowers
-                            name: 'Flowers'
-                            type: 'product'
-                            url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
-                example-lexus:
-                    value:
-                        id: lexus
-                        name: 'Lexus'
-                        description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
-                        city: 'Toyota City'
-                        motto: 'The Pursuit of Perfection'
-                        associations:
-                          - id: lexus-ux
-                            name: 'Lexus UX'
-                            type: 'product'
-                            url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'    
+              example:
+                  value:
+                      id: lexus
+                      name: 'Lexus'
+                      description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
+                      city: 'Toyota City'
+                      motto: 'The Pursuit of Perfection'
+                      associations:
+                        - id: lexus-ux
+                          name: 'Lexus UX'
+                          type: 'product'
+                          url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'    
         '404':
           description: Not Found
           content:
