@@ -33,6 +33,9 @@ jobs:
         run: |
           allCompanies=$(cat data/companies.csv)
           echo "All companies in data/companies.csv: $allCompanies"
+          # break string into array after GitHub Actions encoded newlines
+          IFS='
+          '
           for company in "${{ steps.get_all_examples.outputs.result }}"; do
             if [[ "$allCompanies" =~ "$company" ]]; then
               echo "Company $company is in data/companies.csv"
