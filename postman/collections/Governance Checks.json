@@ -24,6 +24,14 @@
 							"  ",
 							"        pm.expect(companyRecord.associations.length).to.be.above(0);",
 							"        pm.expect(companyRecord.associations).to.be.an('array');",
+							"",
+							"        // check whether material of all associations match the value of postman request parameter material",
+							"        const materialParam = pm.request.url.query.get('material');",
+							"        console.log(\"Material of all associations: \" + companyRecord.associations.map(i => i.material).join(\", \"));",
+							"        if (materialParam) {",
+							"            pm.expect(companyRecord.associations.every(i => i.material === materialParam), `Material ${materialParam} matches materials for ${companyRecord.name}`).to.be.true;",
+							"        }",
+							"        ",
 							"        pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
 							"",
 							"        // visualize",
@@ -83,8 +91,7 @@
 						{
 							"key": "material",
 							"value": "{{material}}",
-							"description": "material to use for product",
-							"type": "text"
+							"description": "material to use for product"
 						}
 					],
 					"variable": [
@@ -341,7 +348,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d28459bf-2f75-4a6b-b6de-ee4b857a9227",
+				"id": "d8268360-3e64-430f-9b41-b40b941dedcc",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -351,7 +358,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "cfc00d3c-c585-41f0-bf0a-a21c35d651de",
+				"id": "d92c15d4-24af-4205-9736-e00dce766e8a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -361,32 +368,32 @@
 	],
 	"variable": [
 		{
-			"id": "328a6822-c53c-4f2f-9121-f1ca0dd3def8",
+			"id": "7191cacb-8882-4776-938a-ed61da5637a4",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "b37d3f12-1507-454d-820e-c7f8b736b75c",
+			"id": "7fe7da3b-918f-4291-9dc0-5b72bed86f12",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "f37698b1-ca57-48b3-9733-9e871bce9322",
+			"id": "f062c731-7c74-4821-9bdc-971e041bc890",
 			"key": "company",
 			"value": "fleurop"
 		},
 		{
-			"id": "1e6e0525-8932-41cf-833c-4573d1701e2d",
+			"id": "2f5a253d-2c84-4002-8fe9-374dee020acb",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "ca11bff8-130e-4ec6-a03c-e38eaba4a6e9",
+			"id": "9380e830-890e-4065-a07a-306f2e91885e",
 			"key": "randomItem",
 			"value": ""
 		},
 		{
-			"id": "f4b92811-b3dd-43e0-9efa-32998a793b87",
+			"id": "2710bfc9-3e61-4a25-a3b5-09a91ff87476",
 			"key": "material",
 			"value": "lego",
 			"type": "string"
