@@ -61,7 +61,6 @@ paths:
           schema:
             type: string
           example: lexus
-      # introduce parameter for material
         - name: material
           in: query
           description: Material to use for the product
@@ -209,7 +208,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Association'
-        
+      example:
+        name: 'Lexus'
+        description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
+        city: 'Toyota City'
+        motto: 'The Pursuit of Perfection'
+        associations:
+        - name: 'Lexus UX'
+          material: 'lego'
+          type: 'product'
+          url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'    
+   
     Association:
       type: object
       required:
