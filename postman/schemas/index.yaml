@@ -70,7 +70,6 @@ paths:
             type: string
             enum:
               - chocolate
-              - gold
               - lego
             default: lego
           example: lego
@@ -233,7 +232,6 @@ components:
           description: The material of the association
           enum:
             - lego
-            - gold
             - chocolate
         url:
           type: string
