@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.1.0'
+  version: '1.1.1'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -208,6 +208,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Association'
+      required:
+        - name
       example:
         name: 'Lexus'
         description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
@@ -246,6 +248,11 @@ components:
           type: string
           format: uri
           description: The a(i)ppealing image generated with the association 
+      example:
+        name: 'Lexus UX'
+        material: 'lego'
+        type: 'product'
+        url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'
     Error:
       type: object
       required:
