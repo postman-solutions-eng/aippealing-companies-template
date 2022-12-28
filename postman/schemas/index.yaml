@@ -72,8 +72,9 @@ paths:
               - chocolate
               - gold
               - lego
+            default: lego
           example: lego
-          default: lego
+          
 
 
       responses:
