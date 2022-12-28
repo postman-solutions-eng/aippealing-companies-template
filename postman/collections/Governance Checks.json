@@ -71,13 +71,21 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/companies/:companyId",
+					"raw": "{{baseUrl}}/companies/:companyId?material={{material}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"companies",
 						":companyId"
+					],
+					"query": [
+						{
+							"key": "material",
+							"value": "{{material}}",
+							"description": "material to use for product",
+							"type": "text"
+						}
 					],
 					"variable": [
 						{
@@ -333,7 +341,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c4c5a3ef-8051-4305-86ee-e89904198f94",
+				"id": "d28459bf-2f75-4a6b-b6de-ee4b857a9227",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -343,7 +351,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "521f7702-d19b-49be-8241-e466a4e72152",
+				"id": "cfc00d3c-c585-41f0-bf0a-a21c35d651de",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -353,29 +361,35 @@
 	],
 	"variable": [
 		{
-			"id": "0ccb09e3-e691-4e84-852d-f93b7414b895",
+			"id": "328a6822-c53c-4f2f-9121-f1ca0dd3def8",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "0481d469-e232-4f60-8f51-3fb13f03243f",
+			"id": "b37d3f12-1507-454d-820e-c7f8b736b75c",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "ddff06c1-24b9-4d99-a5d3-5f4c15c86c05",
+			"id": "f37698b1-ca57-48b3-9733-9e871bce9322",
 			"key": "company",
 			"value": "fleurop"
 		},
 		{
-			"id": "4a20b273-f03a-4f3e-a245-42c9b88776be",
+			"id": "1e6e0525-8932-41cf-833c-4573d1701e2d",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "7c6355d0-9637-428d-aa59-9a0673c37639",
+			"id": "ca11bff8-130e-4ec6-a03c-e38eaba4a6e9",
 			"key": "randomItem",
 			"value": ""
+		},
+		{
+			"id": "f4b92811-b3dd-43e0-9efa-32998a793b87",
+			"key": "material",
+			"value": "lego",
+			"type": "string"
 		}
 	]
 }
