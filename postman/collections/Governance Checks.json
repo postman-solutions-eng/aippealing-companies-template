@@ -24,6 +24,13 @@
 							"  ",
 							"        pm.expect(companyRecord.associations.length).to.be.above(0);",
 							"        pm.expect(companyRecord.associations).to.be.an('array');",
+							"",
+							"        // check whether material of all associations match the value of postman request parameter material",
+							"        const materialParam = pm.request.url.query.get('material');",
+							"        if (materialParam) {",
+							"            pm.expect(companyRecord.associations.every(i => i.material === materialParam), `Material ${materialParam} matches materials for ${companyRecord.name}`).to.be.true;",
+							"        }",
+							"        ",
 							"        pm.collectionVariables.set(\"companyRecord\", JSON.stringify(companyRecord));",
 							"",
 							"        // visualize",
@@ -71,13 +78,20 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/companies/:companyId",
+					"raw": "{{baseUrl}}/companies/:companyId?material={{material}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"companies",
 						":companyId"
+					],
+					"query": [
+						{
+							"key": "material",
+							"value": "{{material}}",
+							"description": "material to use for product"
+						}
 					],
 					"variable": [
 						{
@@ -333,7 +347,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c4c5a3ef-8051-4305-86ee-e89904198f94",
+				"id": "d1def2a8-622c-4466-b2e5-113f9c18405b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -343,7 +357,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "521f7702-d19b-49be-8241-e466a4e72152",
+				"id": "fb8d6531-d220-466b-9b39-8f92c9ccd783",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -353,29 +367,35 @@
 	],
 	"variable": [
 		{
-			"id": "0ccb09e3-e691-4e84-852d-f93b7414b895",
+			"id": "ae5f51ec-3159-4a11-96ea-77bc42154585",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "0481d469-e232-4f60-8f51-3fb13f03243f",
+			"id": "ac004975-8ffa-4e1c-851f-a34322fa293a",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "ddff06c1-24b9-4d99-a5d3-5f4c15c86c05",
+			"id": "db8d71c6-5203-432e-9746-24b1015ff628",
 			"key": "company",
 			"value": "fleurop"
 		},
 		{
-			"id": "4a20b273-f03a-4f3e-a245-42c9b88776be",
+			"id": "687e2eb7-4061-478a-ba6b-b24fb80d0a09",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "7c6355d0-9637-428d-aa59-9a0673c37639",
+			"id": "30c95a65-96d5-4aca-8ac5-2b57bdf9c9cc",
 			"key": "randomItem",
 			"value": ""
+		},
+		{
+			"id": "61981c81-c982-43eb-850e-be2486ca7fb7",
+			"key": "material",
+			"value": "",
+			"type": "string"
 		}
 	]
 }

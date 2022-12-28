@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.0.0'
+  version: '1.1.0'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -61,7 +61,19 @@ paths:
           schema:
             type: string
           example: lexus
-
+      # introduce parameter for material
+        - name: material
+          in: query
+          description: Material to use for the product
+          required: false
+          schema:
+            type: string
+            enum:
+              - chocolate
+              - lego
+            default: lego
+          example: lego
+          
       responses:
         '200':
           description: OK
@@ -220,7 +232,6 @@ components:
           description: The material of the association
           enum:
             - lego
-            - gold
             - chocolate
         url:
           type: string
