@@ -75,8 +75,6 @@ paths:
             default: lego
           example: lego
           
-
-
       responses:
         '200':
           description: OK
