@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.0'
+  version: '1.2.1'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -70,6 +70,7 @@ paths:
             enum:
               - chocolate
               - lego
+              - gold
             default: lego
           example: lego
         - name: mode
@@ -90,9 +91,9 @@ paths:
           description: OK
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Company'
-              example:
+                schema:
+                    $ref: '#/components/schemas/Company'
+                example:
                   value:
                       id: lexus
                       name: 'Lexus'
@@ -177,6 +178,16 @@ paths:
                       type: 'product'
                       material: 'chocolate'
                       url: "https://user-images.githubusercontent.com/1872314/208270631-87b3c79c-c6e8-47dd-9cf2-52451989b83b.png"
+                - id: "becks"
+                  name: "Becks"
+                  city: "Bremen"
+                  motto: "Make it your Beck's"
+                  description: "German brewing company founded in 1873"
+                  associations:
+                    - name: "beer"
+                      type: "product"
+                      url: "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png"
+                      material: "gold"                
                 
         '400':
           description: Bad Request
@@ -256,6 +267,7 @@ components:
           enum:
             - lego
             - chocolate
+            - gold
         url:
           type: string
           format: uri
