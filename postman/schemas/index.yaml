@@ -101,10 +101,10 @@ paths:
                         motto: "Make it your Beck's"
                         description: "German brewing company founded in 1873"
                         associations:
-                        - name: "beer"
-                          type: "product"
-                          url: "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png"
-                          material: "gold"                
+                          - name: "beer"
+                            type: "product"
+                            url: "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png"
+                            material: "gold"                
         '404':
           description: Not Found
           content:
