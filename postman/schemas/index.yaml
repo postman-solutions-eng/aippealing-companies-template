@@ -187,7 +187,17 @@ paths:
                     - name: "beer"
                       type: "product"
                       url: "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png"
-                      material: "gold"                
+                      material: "gold"
+                - id: "daimler"
+                  name: "Daimler"
+                  city: "Stuttgart, Germany"
+                  motto: "The Best or Nothing"
+                  description: "a German multinational automotive corporation"
+                  associations:
+                    - name: "Mercedes e-class"
+                      type: "product"
+                      url: "https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png"
+                      material: "plush"
                 
         '400':
           description: Bad Request
