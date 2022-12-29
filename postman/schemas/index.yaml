@@ -95,7 +95,7 @@ paths:
                 schema:
                     $ref: '#/components/schemas/Company'
                 example:
-                    id: "Daimler"
+                    id: "daimler"
                     name: "Daimler"
                     city: "Stuttgart, Germany"
                     motto: "The Best or Nothing"
