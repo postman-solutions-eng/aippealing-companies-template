@@ -1,4 +1,5 @@
 company,material,mode,expectedStatus
+becks,gold,exact,200
 lexus,lego,exact,200
 fleurop,lego,exact,404
 fleurop,chocolate,exact,404
