@@ -277,7 +277,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/companies/:companyId?material=lego&mode=fuzzy",
+							"raw": "{{baseUrl}}/companies/:companyId?material=lego",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -294,7 +294,8 @@
 								{
 									"key": "mode",
 									"value": "fuzzy",
-									"description": "Mode to use for the product, exact and fuzzy operate on the curated list of products, ai uses AI to generate all aspects of the product"
+									"description": "Mode to use for the product, exact and fuzzy operate on the curated list of products, ai uses AI to generate all aspects of the product",
+									"disabled": true
 								}
 							],
 							"variable": [
