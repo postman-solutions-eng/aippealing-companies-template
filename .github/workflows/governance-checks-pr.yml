@@ -17,6 +17,11 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
+      - name: Get material of first product of first example of company id in /companies/{:id} endpoint
+        id: get_first_example_material
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.associations[0].material' postman/schemas/index.yaml
       # check whether first example is in all examples list
       - name: Check if first example is in all examples list
         run: |
@@ -49,6 +54,6 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}"
+          postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
           # Lint your API using Postman CLI
           postman api lint --integration-id 129431
