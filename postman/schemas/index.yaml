@@ -60,7 +60,7 @@ paths:
           required: true
           schema:
             type: string
-          example: lexus
+          example: daimler
         - name: material
           in: query
           description: Material to use for the product
@@ -71,8 +71,9 @@ paths:
               - chocolate
               - lego
               - gold
+              - plush
             default: lego
-          example: lego
+          example: plush
         - name: mode
           in: query
           description: Mode to use for the product, exact and fuzzy operate on the curated list of products, ai uses AI to generate all aspects of the product
