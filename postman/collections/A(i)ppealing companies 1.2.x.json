@@ -359,7 +359,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"value\": {\n    \"id\": \"lexus\",\n    \"name\": \"Lexus\",\n    \"description\": \"Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars.\",\n    \"city\": \"Toyota City\",\n    \"motto\": \"The Pursuit of Perfection\",\n    \"associations\": [\n      {\n        \"name\": \"Lexus UX\",\n        \"material\": \"lego\",\n        \"type\": \"product\",\n        \"url\": \"https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png\"\n      }\n    ]\n  }\n}"
+							"body": "{\n    \"id\": \"lexus\",\n    \"name\": \"Lexus\",\n    \"description\": \"Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars.\",\n    \"city\": \"Toyota City\",\n    \"motto\": \"The Pursuit of Perfection\",\n    \"associations\": [\n      {\n        \"name\": \"Lexus UX\",\n        \"material\": \"lego\",\n        \"type\": \"product\",\n        \"url\": \"https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png\"\n      }\n    ]\n}"
 						},
 						{
 							"id": "cefa9234-9d90-4e68-8a01-4c9315073913",

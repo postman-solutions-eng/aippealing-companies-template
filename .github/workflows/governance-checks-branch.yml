@@ -12,7 +12,7 @@ jobs:
         id: get_first_example
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.id' postman/schemas/index.yaml
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.id' postman/schemas/index.yaml
       - name: Get all examples of companies endpoint
         id: get_all_examples
         uses: mikefarah/yq@master
