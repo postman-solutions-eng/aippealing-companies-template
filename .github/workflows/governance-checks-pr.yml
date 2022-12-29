@@ -11,7 +11,7 @@ jobs:
         id: get_first_example
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.id' postman/schemas/index.yaml
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.id' postman/schemas/index.yaml
       - name: Get all examples of companies endpoint
         id: get_all_examples
         uses: mikefarah/yq@master
@@ -21,7 +21,7 @@ jobs:
         id: get_first_example_material
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.value.associations[0].material' postman/schemas/index.yaml
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.associations[0].material' postman/schemas/index.yaml
       # check whether first example is in all examples list
       - name: Check if first example is in all examples list
         run: |
