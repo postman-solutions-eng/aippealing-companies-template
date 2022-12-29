@@ -367,32 +367,32 @@
 	],
 	"variable": [
 		{
-			"id": "ae5f51ec-3159-4a11-96ea-77bc42154585",
+			"id": "ebbf1d7e-ed99-49fd-b241-0536cd9910f2",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "ac004975-8ffa-4e1c-851f-a34322fa293a",
+			"id": "5311d0f5-5ab8-46e5-992b-7c4579be74b2",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "db8d71c6-5203-432e-9746-24b1015ff628",
+			"id": "befbb413-c85d-4b7d-818d-6e75e539ae3b",
 			"key": "company",
 			"value": "fleurop"
 		},
 		{
-			"id": "687e2eb7-4061-478a-ba6b-b24fb80d0a09",
+			"id": "32403014-532d-4647-b6c5-f206f9e6acf5",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "30c95a65-96d5-4aca-8ac5-2b57bdf9c9cc",
+			"id": "ebc90bb4-b4d4-4bf0-8573-44259c6351f8",
 			"key": "randomItem",
 			"value": ""
 		},
 		{
-			"id": "61981c81-c982-43eb-850e-be2486ca7fb7",
+			"id": "14b4e8b8-6328-4254-9431-20516d973514",
 			"key": "material",
 			"value": "",
 			"type": "string"
