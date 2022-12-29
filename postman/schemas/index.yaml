@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.0'
+  version: '1.2.1'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -70,6 +70,7 @@ paths:
             enum:
               - chocolate
               - lego
+              - gold
             default: lego
           example: lego
         - name: mode
@@ -256,6 +257,7 @@ components:
           enum:
             - lego
             - chocolate
+            - gold
         url:
           type: string
           format: uri
