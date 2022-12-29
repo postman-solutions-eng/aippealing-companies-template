@@ -355,7 +355,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "320a7702-cf3d-456d-b42c-4dae3fdb1a56",
+				"id": "4be0d566-4819-4a28-a8c5-a2bb50f76cbe",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -365,7 +365,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6428d80a-9049-4939-8b17-aaf3be1fe2be",
+				"id": "cd871a45-7fa4-4e09-a476-06cacff2fbbf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -375,46 +375,46 @@
 	],
 	"variable": [
 		{
-			"id": "526e4af4-d816-4400-ab18-d779f71f90d7",
+			"id": "c854473a-4cc0-49c3-a31e-1b1aa9ca7acd",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "3858e154-0661-4262-b942-3d22260f2415",
+			"id": "17a5be0e-e2f4-4a44-a18c-030269045ba3",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "ef980d6d-10eb-43c0-89bd-a9c6f5ed2738",
+			"id": "2ac2c183-4a78-4007-920f-d90658738384",
 			"key": "company",
 			"value": "yousendmeflowers"
 		},
 		{
-			"id": "856ee892-f6f7-4704-9bc9-d29a5fc97323",
+			"id": "dd7131c0-87bb-4f08-9f8d-92c7e53714ba",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "4ba803ff-c624-407d-a167-96d3ab52f170",
+			"id": "7c15fa79-d000-4d20-b6ae-68fed6860437",
 			"key": "randomItem",
 			"value": ""
 		},
 		{
-			"id": "e1d99c0a-2a36-4066-a117-ac368b9169e6",
+			"id": "8aa015c9-d848-4941-87e4-832c20a7ea77",
 			"key": "material",
-			"value": "lego",
+			"value": "gold",
 			"type": "string"
 		},
 		{
-			"id": "c4b2cf0b-a6f5-46d9-85c8-09a097d873fc",
+			"id": "77a5c9d9-a90a-4058-b7ff-5998240987ab",
 			"key": "expectedStatus",
 			"value": "200",
 			"type": "string"
 		},
 		{
-			"id": "46ffaff2-7a43-4370-ba7e-61f64b588c28",
+			"id": "f8abea3b-1d1b-4929-8854-706ee720aff4",
 			"key": "mode",
-			"value": "fuzzy",
+			"value": "ai",
 			"type": "string"
 		}
 	]
