@@ -1,4 +1,5 @@
 company,material,mode,expectedStatus
+daimler,plush,exact,200
 becks,gold,exact,200
 lexus,lego,exact,200
 fleurop,lego,exact,404
