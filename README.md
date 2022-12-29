@@ -27,7 +27,7 @@ Inspired by the image and text generation capabilities of [OpenAI](https://www.p
 
 ## Trying it out :office: :arrow_right: :robot: :arrow_right: :chocolate_bar: :car: :framed_picture:  :tada: 
 
-Follow the [generated API documentation](https://documenter.getpostman.com/view/24483733/2s8YzZPe44) and click the "Run in Postman" button
+Follow the [generated API documentation](https://documenter.getpostman.com/view/24483733/2s8Z6yWseX) and click the "Run in Postman" button
 
 
 <img width="1290" alt="image" src="https://user-images.githubusercontent.com/1872314/208407634-c0a48387-56cc-44f1-9c16-59041a32e903.png">
