@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Company among a(i)ppealing companies (direct search)",
+			"name": "Company among a(i)ppealing companies (exact search)",
 			"event": [
 				{
 					"listen": "test",
@@ -16,8 +16,9 @@
 						"id": "27ffe29b-58fb-41d5-92ef-d1abd5c529d8",
 						"exec": [
 							"pm.test(\"Checking whether direct search reveals any result\", function () {",
-							"    // status code is either 200 or 404",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+							"",
+							"    var expectedStatus = Number(pm.variables.get(\"expectedStatus\"));",
+							"    pm.expect(pm.response.code).to.equals(expectedStatus);",
 							"    // if status code is 200, we need to extract the answer and set collection variables",
 							"    if (pm.response.code === 200) {",
 							"        const companyRecord = pm.response.json();",
@@ -56,7 +57,10 @@
 							"        postman.setNextRequest(\"Update GitHub PR / Issue\");",
 							"  ",
 							"    } else {",
-							"        // we do nothing, just go to the next request in the collection (fuzzy search)",
+							"        // if mode was fuzzy and we did not expect a 200, we would set the next request to null",
+							"        if (pm.request.url.query.get('mode') === 'fuzzy') {",
+							"            postman.setNextRequest(null);",
+							"        }",
 							"    }",
 							"  });",
 							""
@@ -78,7 +82,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/companies/:companyId?material={{material}}",
+					"raw": "{{baseUrl}}/companies/:companyId?material={{material}}&mode={{mode}}",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -91,6 +95,10 @@
 							"key": "material",
 							"value": "{{material}}",
 							"description": "material to use for product"
+						},
+						{
+							"key": "mode",
+							"value": "{{mode}}"
 						}
 					],
 					"variable": [
@@ -347,7 +355,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d1def2a8-622c-4466-b2e5-113f9c18405b",
+				"id": "320a7702-cf3d-456d-b42c-4dae3fdb1a56",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -357,7 +365,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "fb8d6531-d220-466b-9b39-8f92c9ccd783",
+				"id": "6428d80a-9049-4939-8b17-aaf3be1fe2be",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -367,34 +375,46 @@
 	],
 	"variable": [
 		{
-			"id": "ae5f51ec-3159-4a11-96ea-77bc42154585",
+			"id": "526e4af4-d816-4400-ab18-d779f71f90d7",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "ac004975-8ffa-4e1c-851f-a34322fa293a",
+			"id": "3858e154-0661-4262-b942-3d22260f2415",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "db8d71c6-5203-432e-9746-24b1015ff628",
+			"id": "ef980d6d-10eb-43c0-89bd-a9c6f5ed2738",
 			"key": "company",
-			"value": "fleurop"
+			"value": "yousendmeflowers"
 		},
 		{
-			"id": "687e2eb7-4061-478a-ba6b-b24fb80d0a09",
+			"id": "856ee892-f6f7-4704-9bc9-d29a5fc97323",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "30c95a65-96d5-4aca-8ac5-2b57bdf9c9cc",
+			"id": "4ba803ff-c624-407d-a167-96d3ab52f170",
 			"key": "randomItem",
 			"value": ""
 		},
 		{
-			"id": "61981c81-c982-43eb-850e-be2486ca7fb7",
+			"id": "e1d99c0a-2a36-4066-a117-ac368b9169e6",
 			"key": "material",
-			"value": "",
+			"value": "lego",
+			"type": "string"
+		},
+		{
+			"id": "c4b2cf0b-a6f5-46d9-85c8-09a097d873fc",
+			"key": "expectedStatus",
+			"value": "200",
+			"type": "string"
+		},
+		{
+			"id": "46ffaff2-7a43-4370-ba7e-61f64b588c28",
+			"key": "mode",
+			"value": "fuzzy",
 			"type": "string"
 		}
 	]
