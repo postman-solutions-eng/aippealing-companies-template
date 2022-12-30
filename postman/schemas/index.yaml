@@ -100,7 +100,7 @@ paths:
                     motto: "The Best or Nothing"
                     description: "a German multinational automotive corporation"
                     associations:
-                      - name: "automobiles"
+                      - name: "Mercedes e-class"
                         type: "product"
                         url: "https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png"
                         material: "plush"
