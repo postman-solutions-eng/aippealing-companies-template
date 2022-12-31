@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.2'
+  version: '1.2.3'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -273,11 +273,6 @@ components:
         material:
           type: string
           description: The material of the association
-          enum:
-            - lego
-            - chocolate
-            - gold
-            - plush
         url:
           type: string
           format: uri
