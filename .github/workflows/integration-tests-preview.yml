@@ -1,0 +1,37 @@
+name: Integration testing on preview environment and PR feedback
+
+on: pull_request
+
+jobs:
+  integration-tests-preview:
+    name: Integration testing on preview environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get first example of company id in /companies/{:id} endpoint
+        id: get_first_example
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.id' postman/schemas/index.yaml
+
+      - name: Get material of first product of first example of company id in /companies/{:id} endpoint
+        id: get_first_example_material
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.associations[0].material' postman/schemas/index.yaml
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Give first Mock feedback on PR
+        run: | 
+          postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" 
+      - name: Give first integration test feedback on PR
+        run: |
+          sleep 20s
+          postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
+      - name: Run full integration test suite on preview environment
+        run: | 
+          postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PREVIEW }}" --env-var "baseUrl=https://aippealing-companies-pr-${{ github.event.pull_request.number }}.herokuapp.com" --iteration-data "data/companies.csv"
