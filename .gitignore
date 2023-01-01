@@ -1,0 +1,7 @@
+# .gitignore
+dist
+node_modules
+coverage
+.vscode
+.cache
+*.log
