@@ -30,8 +30,8 @@ jobs:
           postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
       - name: Give first Preview Env feedback on PR
         run: |
-          sleep 20s
-          postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PREVIEW }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
+          sleep 30s
+          postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PREVIEW }}" --env-var "baseUrl=https://aippealing-companies-pr-${{ github.event.pull_request.number }}.herokuapp.com" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
       - name: Run full integration test suite on preview environment
         run: | 
           postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PREVIEW }}" --env-var "baseUrl=https://aippealing-companies-pr-${{ github.event.pull_request.number }}.herokuapp.com" --iteration-data "data/companies.csv"
