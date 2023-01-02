@@ -81,7 +81,7 @@ jobs:
         uses: SFDigitalServices/wait-for-deployment-action@v2
         id: deployment
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           environment: aippealing-companies-staging
           timeout: 60
       # if branch is main, run integration tests on staging environment
