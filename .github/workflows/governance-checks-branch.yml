@@ -78,13 +78,14 @@ jobs:
       # if branch is main, wait for staging environment to be ready
       - name: Wait for staging env to be ready
         if: github.ref == 'refs/heads/main'
-        uses: SFDigitalServices/wait-for-deployment-action@v2
+        uses: jonico/wait-for-deployment-action@main
         id: deployment
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           environment: aippealing-companies-staging
           timeout: 60
-          interval: 5
+          interval: 3
+          
       # if branch is main, run integration tests on staging environment
       - name: Run Integration tests on staging env
         if: github.ref == 'refs/heads/main'

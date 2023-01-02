@@ -37,10 +37,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           environment: aippealing-companies-pr-${{ github.event.pull_request.number }}
           timeout: 60
-          interval: 5
+          interval: 3
           # pass head sha of current PR to action
           sha: ${{ github.event.pull_request.head.sha }}
-          
 
       - name: Give first Preview Env feedback on PR
         run: |
