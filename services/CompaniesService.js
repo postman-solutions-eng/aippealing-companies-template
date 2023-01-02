@@ -17,7 +17,7 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       // get environment variable token
       var token = process.env.token;
 
-      // get environment variable size, if not set, set it to 128x128
+      // get environment variable size, if not set, set it to 256x256
       var size = process.env.size || "256x256";
 
       var company = companyId;
