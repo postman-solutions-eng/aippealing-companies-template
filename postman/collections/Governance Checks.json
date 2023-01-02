@@ -67,6 +67,23 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "95bb6ebc-67b7-4765-bb37-6dd8a429df29",
+						"exec": [
+							"if (globals.previousRequest != undefined) {",
+							"   let incomingPayload = JSON.parse(globals.previousRequest).data",
+							"    if (incomingPayload.company != null && incomingPayload.material != null) {",
+							"        pm.collectionVariables.set(\"company\", incomingPayload.company);",
+							"        pm.collectionVariables.set(\"material\", incomingPayload.material);",
+							"        pm.collectionVariables.set(\"mode\", \"ai\");",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"id": "672a128b-fabb-4b21-b185-5c0e653ed0a9",
