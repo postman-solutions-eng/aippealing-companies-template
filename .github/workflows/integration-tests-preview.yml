@@ -28,9 +28,18 @@ jobs:
       - name: Give first Mock Env feedback on PR
         run: | 
           postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
+      
+      # wait until preview environment is ready
+      - name: Wait for preview environment to be ready
+        uses: SFDigitalServices/wait-for-deployment-action@v1
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: aippealing-companies-pr-${{ github.event.pull_request.number }}
+          timeout: 60
+
       - name: Give first Preview Env feedback on PR
         run: |
-          sleep 30s
           postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PREVIEW }}" --env-var "baseUrl=https://aippealing-companies-pr-${{ github.event.pull_request.number }}.herokuapp.com" --env-var "issue_number=${{github.event.pull_request.number}}" --env-var "company=${{ steps.get_first_example.outputs.result}}" --env-var "material=${{ steps.get_first_example_material.outputs.result}}"
       - name: Run full integration test suite on preview environment
         run: | 
