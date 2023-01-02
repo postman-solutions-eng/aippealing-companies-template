@@ -17,6 +17,9 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       // get environment variable token
       var token = process.env.token;
 
+      // get environment variable size, if not set, set it to 128x128
+      var size = process.env.size || "128x128";
+
       var company = companyId;
 
       // read in curated mock data from file data/companies.json
@@ -119,7 +122,7 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
           body: JSON.stringify({
             "prompt": prompt,
             "n": 1,
-            "size": "512x512"
+            "size": size,
           })
 
         };
