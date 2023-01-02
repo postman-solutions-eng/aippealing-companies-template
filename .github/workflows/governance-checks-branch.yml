@@ -28,7 +28,7 @@ jobs:
         with:
           cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
       
-      - name: Check if first example is in all examples list
+      - name: Check if first company example is in all examples list
         run: |
           echo "First example in /companies/{:id} endpoint : ${{ steps.get_first_example.outputs.result }}"
           echo "All examples: ${{ steps.get_all_examples.outputs.result }}"
@@ -39,7 +39,7 @@ jobs:
             exit 1
           fi
       
-      - name: Check if all examples are in data/companies.csv
+      - name: Check if all company examples are in data/companies.csv
         run: |
           allCompanies=$(cat data/companies.csv)
           allExamples="${{ steps.get_all_examples.outputs.result }}"
