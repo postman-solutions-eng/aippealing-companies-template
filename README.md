@@ -1,6 +1,6 @@
 # A(i)ppealing Companies :office: :arrow_right: :robot: :arrow_right: :chocolate_bar: :car: :framed_picture: 
 
-[API](https://documenter.getpostman.com/view/24483733/2s8YzZPe44) to create appealing images of company products made of chocolate, gold or lego.
+[API](https://documenter.getpostman.com/view/24483733/2s8Z6yWseX) to create appealing images of company products made of chocolate, gold or lego.
 Reference implementation is based on OpenAI (DALL-E, GPT-3).
 
 ## Motivation
