@@ -17,6 +17,9 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       // get environment variable token
       var token = process.env.token;
 
+      // get environment variable size, if not set, set it to 256x256
+      var size = process.env.size || "256x256";
+
       var company = companyId;
 
       // read in curated mock data from file data/companies.json
@@ -41,7 +44,7 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       } else if (mode == "ai") {
         // create a new company object by derriving the company description, motto, city and its product from the company variable and OpenAI's Davinci API
         var prompt = `Company ${company} is mostly known for its `;
-        var productName = "";
+        var productName = "unknown product";
         var options = {
           'method': 'POST',
           'url': 'https://api.openai.com/v1/completions',
@@ -63,14 +66,19 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
         await request(options, function (error, response) {
           if (error) {
             console.log(error);
-            throw new Error(error);
+            // throw new Error(error);
+          } else {
+            // wrap in try catch to prevent errors
+            try {
+              var firstItem = JSON.parse(response.body).choices[0];
+              console.log(firstItem.text);
+
+              // only take text until the first end of the sentence and remove any new lines and quotes
+              productName = company + " " + firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
+            } catch (e) {
+              console.log(e);
+            }
           }
-
-          var firstItem = JSON.parse(response.body).choices[0];
-          console.log(firstItem.text);
-
-          // only take text until the first end of the sentence and remove any new lines and quotes
-          productName = company + " " + firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
         });
 
         filtered= [{
@@ -119,28 +127,33 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
           body: JSON.stringify({
             "prompt": prompt,
             "n": 1,
-            "size": "512x512"
+            "size": size
           })
 
         };
 
         // send request to openai and wait for response, save response to url
         await request(options, function (error, response) {
+          association.url = "https://user-images.githubusercontent.com/1872314/210279871-0ddf7100-a680-4e9a-9a28-2fcfbcf30355.png";
           if (error) {
             console.log(error);
-            throw new Error(error);
+            //throw new Error(error);
+          } else {
+            try {
+              var url = JSON.parse(response.body).data[0].url;
+              association.url = url;
+            } catch (e) {
+              console.log(e);
+            }
           }
-
-          var url = JSON.parse(response.body).data[0].url;
-          association.url = url;
         });
       }
 
       resolve(Service.successResponse(companyRecord));
     } catch (e) {
       reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
+        { "message": e.message || 'Invalid input', "status": e.status || 500},
+        e.status || 500,
       ));
     }
   },
