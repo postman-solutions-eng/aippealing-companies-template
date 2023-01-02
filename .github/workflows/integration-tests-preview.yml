@@ -31,7 +31,7 @@ jobs:
       
       # wait until preview environment is ready
       - name: Wait for preview environment to be ready
-        uses: SFDigitalServices/wait-for-deployment-action@v1
+        uses: SFDigitalServices/wait-for-deployment-action@v2
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

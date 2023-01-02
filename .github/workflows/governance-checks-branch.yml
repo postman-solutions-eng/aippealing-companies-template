@@ -78,7 +78,7 @@ jobs:
       # if branch is main, wait for staging environment to be ready
       - name: Wait for staging environment to be ready
         if: github.ref == 'refs/heads/main'
-        uses: SFDigitalServices/wait-for-deployment-action@v1
+        uses: SFDigitalServices/wait-for-deployment-action@v2
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
