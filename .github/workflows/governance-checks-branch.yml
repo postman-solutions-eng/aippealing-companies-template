@@ -14,13 +14,21 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: yq '.paths.["/companies/{companyId}"].get.responses.'200'.content.application/json.example.id' postman/schemas/index.yaml
+
+      # get all materials possible for material query paramter of /companies/{:id} endpoint
+      - name: Get all possible materials for material query parameter
+        id: get_all_materials
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.paths.["/companies/{companyId}"].get.parameters[] | select (.name == "material").schema.enum[]' postman/schemas/index.yaml
+      
       - name: Get all examples of companies endpoint
         id: get_all_examples
         uses: mikefarah/yq@master
         with:
           cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
-      # check whether first example is in all examples list
-      - name: Check if first example is in all examples list
+      
+      - name: Check if first company example is in all examples list
         run: |
           echo "First example in /companies/{:id} endpoint : ${{ steps.get_first_example.outputs.result }}"
           echo "All examples: ${{ steps.get_all_examples.outputs.result }}"
@@ -30,8 +38,8 @@ jobs:
             echo "First example is not in all examples list"
             exit 1
           fi
-      # check whether all examples are in data/companies.csv
-      - name: Check if all examples are in data/companies.csv
+      
+      - name: Check if all company examples are in data/companies.csv
         run: |
           allCompanies=$(cat data/companies.csv)
           allExamples="${{ steps.get_all_examples.outputs.result }}"
@@ -41,6 +49,20 @@ jobs:
               echo "Company $company is in data/companies.csv"
             else
               echo "Company $company is not in data/companies.csv"
+              exit 1
+            fi
+          done
+
+      - name: Check if all materials are in data/companies.csv
+        run: |
+          allCompanies=$(cat data/companies.csv)
+          allMaterials="${{ steps.get_all_materials.outputs.result }}"
+          echo "All companies in data/companies.csv: $allCompanies"
+          for material in $allMaterials; do
+            if [[ "$allCompanies" =~ "$material" ]]; then
+              echo "Material $material is in data/companies.csv"
+            else
+              echo "Material $material is not in data/companies.csv"
               exit 1
             fi
           done

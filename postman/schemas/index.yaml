@@ -71,6 +71,7 @@ paths:
               - lego
               - gold
               - plush
+              - platin
             default: lego
           example: plush
         - name: mode
@@ -94,16 +95,16 @@ paths:
                 schema:
                     $ref: '#/components/schemas/Company'
                 example:
-                    id: "daimler"
-                    name: "Daimler"
-                    city: "Stuttgart, Germany"
-                    motto: "The Best or Nothing"
-                    description: "a German multinational automotive corporation"
+                    id: 'allianz'
+                    name: 'Allianz'
+                    city: 'Munich'
+                    motto: 'Together. Stronger.'
+                    description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
                     associations:
-                      - name: "Mercedes e-class"
-                        type: "product"
-                        url: "https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png"
-                        material: "plush"
+                      - name: 'Allianz Arena'
+                        type: 'product'
+                        material: 'platin'
+                        url: "https://user-images.githubusercontent.com/1872314/210261534-ec4f219a-a0dc-4f4a-8f6d-3c08bd530061.png"
         '404':
           description: Not Found
           content:
