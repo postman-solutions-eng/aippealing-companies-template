@@ -18,7 +18,7 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       var token = process.env.token;
 
       // get environment variable size, if not set, set it to 128x128
-      var size = process.env.size || "128x128";
+      var size = process.env.size || "256x256";
 
       var company = companyId;
 
@@ -152,8 +152,8 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       resolve(Service.successResponse(companyRecord));
     } catch (e) {
       reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
+        { "message": e.message || 'Invalid input', "status": e.status || 500},
+        e.status || 500,
       ));
     }
   },
