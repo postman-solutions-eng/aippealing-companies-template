@@ -71,6 +71,7 @@ paths:
               - lego
               - gold
               - plush
+              - platin
             default: lego
           example: plush
         - name: mode
