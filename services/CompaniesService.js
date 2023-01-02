@@ -70,7 +70,7 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
           console.log(firstItem.text);
 
           // only take text until the first end of the sentence and remove any new lines and quotes
-          productName = firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
+          productName = company + " " + firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
         });
 
         filtered= [{
