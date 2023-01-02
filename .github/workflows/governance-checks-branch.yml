@@ -75,11 +75,21 @@ jobs:
         run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --iteration-data "data/companies.csv"
       - name: Check API for security and compliance
         run: postman api lint --integration-id 129431
+      # if branch is main, wait for staging environment to be ready
+      - name: Wait for staging env to be ready
+        if: github.ref == 'refs/heads/main'
+        uses: jonico/wait-for-deployment-action@main
+        id: deployment
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          environment: aippealing-companies-staging
+          timeout: 60
+          interval: 3
+          
       # if branch is main, run integration tests on staging environment
-      - name: Run Integration tests
+      - name: Run Integration tests on staging env
         if: github.ref == 'refs/heads/main'
         run: |
-          sleep 45s
           postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_STAGING }}" --iteration-data "data/companies.csv"
       
           
