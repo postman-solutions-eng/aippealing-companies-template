@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.4'
+  version: '1.2.5'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -39,8 +39,6 @@ servers:
     description: Production Server
   - url: https://aippealing-companies-staging.herokuapp.com
     description: Staging Server
-  - url: https://57c39747-9edd-4d1f-bc93-da508fa87c6f.mock.pstmn.io
-    description: Mock Server
   - url: http://localhost:3000
     description: Local test bed
 paths:
@@ -95,16 +93,16 @@ paths:
                 schema:
                     $ref: '#/components/schemas/Company'
                 example:
-                    id: 'allianz'
-                    name: 'Allianz'
-                    city: 'Munich'
-                    motto: 'Together. Stronger.'
-                    description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
-                    associations:
-                      - name: 'Allianz Arena'
-                        type: 'product'
-                        material: 'platin'
-                        url: "https://user-images.githubusercontent.com/1872314/210261534-ec4f219a-a0dc-4f4a-8f6d-3c08bd530061.png"
+                  id: yousendmeflowers
+                  name: 'Fleurop / yousendmeflowers / main'
+                  city: '{{$randomCity}}'
+                  motto: '{{$randomCatchPhrase}}'
+                  description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
+                  associations:
+                    - name: 'Flowers'
+                      type: 'product'
+                      material: 'lego'
+                      url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
         '404':
           description: Not Found
           content:
