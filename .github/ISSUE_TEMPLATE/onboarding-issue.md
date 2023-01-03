@@ -348,4 +348,5 @@ We could adjust the [preview environment's](https://automotive-demo.postman.co/w
 - [ ] Partner Workspaces
 - [ ] Custom token scanning
 - [ ] Accessing Postman via API for further integration (custom dev portal publishing, server/client code generation)
-- [ ] Find out more about environments and partial variable overrides in C/CD
+- [ ] Find out more about environments and partial variable overrides in CI/CD
+- [ ] Checking workspace best practices for InnerSource and OpenSource
