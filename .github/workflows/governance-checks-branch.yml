@@ -72,7 +72,7 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run Mock API tests
-        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "129431-${{ github.run_id }}" --iteration-data "data/companies.csv"
+        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" --iteration-data "data/companies.csv"
       - name: Check API for security and compliance
         run: postman api lint --integration-id 129431
       # if branch is main, wait for staging environment to be ready
