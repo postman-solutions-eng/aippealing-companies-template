@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.4'
+  version: '1.2.5'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -95,16 +95,16 @@ paths:
                 schema:
                     $ref: '#/components/schemas/Company'
                 example:
-                    id: 'allianz'
-                    name: 'Allianz'
-                    city: 'Munich'
-                    motto: 'Together. Stronger.'
-                    description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
-                    associations:
-                      - name: 'Allianz Arena'
-                        type: 'product'
-                        material: 'platin'
-                        url: "https://user-images.githubusercontent.com/1872314/210261534-ec4f219a-a0dc-4f4a-8f6d-3c08bd530061.png"
+                  id: 'lexus'
+                  name: 'Lexus'
+                  city: 'Toyota'
+                  motto: 'The Pursuit of Perfection'
+                  description: "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars."
+                  associations:
+                    - name: 'Lexus UX'
+                      type: 'product'
+                      material: 'chocolate'
+                      url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'
         '404':
           description: Not Found
           content:
