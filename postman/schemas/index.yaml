@@ -39,8 +39,6 @@ servers:
     description: Production Server
   - url: https://aippealing-companies-staging.herokuapp.com
     description: Staging Server
-  - url: https://57c39747-9edd-4d1f-bc93-da508fa87c6f.mock.pstmn.io
-    description: Mock Server
   - url: http://localhost:3000
     description: Local test bed
 paths:
