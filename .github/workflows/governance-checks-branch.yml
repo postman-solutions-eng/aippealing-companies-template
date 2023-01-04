@@ -82,7 +82,7 @@ jobs:
       # if branch is main, wait for staging environment to be ready
       - name: Wait for staging env to be ready
         if: github.ref == 'refs/heads/main'
-        uses: jonico/wait-for-deployment-action@main
+        uses: jonico/wait-for-deployment-action@v3
         id: deployment
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
