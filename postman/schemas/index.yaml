@@ -294,5 +294,6 @@ components:
       type: apiKey
       in: header
       name: X-Api-Key
+      description: API key for this API is an OpenAI compatible key. You can get your key at https://beta.openai.com/
 security:
   - ApiKey: []
