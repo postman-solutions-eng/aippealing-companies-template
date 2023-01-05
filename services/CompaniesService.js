@@ -24,7 +24,8 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
           { "message": "Unauthorized" },
           401,
         ));
-
+      }
+      
       // get environment variable token
       //var token = process.env.token;
 
