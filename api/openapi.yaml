@@ -120,6 +120,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
       summary: Get company
       tags:
       - companies
