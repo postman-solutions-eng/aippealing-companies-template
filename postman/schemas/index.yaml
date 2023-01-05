@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.5'
+  version: '1.2.6'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -111,6 +111,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -294,5 +300,6 @@ components:
       type: apiKey
       in: header
       name: X-Api-Key
+      description: API key for this API is an OpenAI compatible key. You can get your key at https://beta.openai.com/
 security:
   - ApiKey: []
