@@ -15,7 +15,7 @@
 					"script": {
 						"id": "27ffe29b-58fb-41d5-92ef-d1abd5c529d8",
 						"exec": [
-							"pm.test(\"Checking whether direct search reveals any result\", function () {",
+							"pm.test(\"Checking whether direct search reveals expected result\", function () {",
 							"",
 							"    var expectedStatus = Number(pm.variables.get(\"expectedStatus\"));",
 							"    pm.expect(pm.response.code).to.equals(expectedStatus);",
