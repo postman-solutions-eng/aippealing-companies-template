@@ -475,13 +475,13 @@
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "key",
-				"value": "X-Api-Key",
+				"key": "value",
+				"value": "{{OpenAIToken}}",
 				"type": "string"
 			},
 			{
-				"key": "value",
-				"value": "<API Key>",
+				"key": "key",
+				"value": "X-Api-Key",
 				"type": "string"
 			},
 			{
@@ -491,9 +491,31 @@
 			}
 		]
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "67828bdb-7210-4a46-9aee-e4283cd0af51",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f27b0fdb-0988-47b0-9c4c-aff7f7d44c9e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "d1a2174d-61f0-4a99-b516-6d43ec459c84",
+			"id": "e4c4c17c-5a6b-4cb5-bc86-d55fa4b19ebc",
 			"key": "baseUrl",
 			"value": "https://aippealing-companies.herokuapp.com",
 			"type": "string"
