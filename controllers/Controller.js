@@ -101,6 +101,11 @@ class Controller {
         requestParams[param.name] = request.headers[param.name];
       }
     });
+    // if x-api-key is defined in the header, we need to add it to the requestParams
+    if (request.headers['x-api-key']) {
+      requestParams['xApiKey'] = request.headers['x-api-key'];
+    }
+
     return requestParams;
   }
 

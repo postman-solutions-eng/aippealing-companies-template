@@ -11,14 +11,11 @@ const Service = require('./Service');
 * 
 * returns Company
 * */
-const getCompany = ({ companyId, material, mode }) => new Promise(
+const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
   async (resolve, reject) => {
     try {
-      // get X-Api-Key from header
-      const xApiKey = req.get('X-Api-Key');
-
-      // if X-Api-Key is not set or does not start with "Bearer sk_", return a 401 and an object with message "Unauthorized"
-      if (!xApiKey || !xApiKey.startsWith("Bearer sk_")) {
+      
+      if (!xApiKey || !xApiKey.startsWith("sk-")) {
         // throw error with status code 401 and message "Unauthorized"
         return reject(Service.rejectResponse(
           { "message": "Unauthorized" },
@@ -30,7 +27,9 @@ const getCompany = ({ companyId, material, mode }) => new Promise(
       //var token = process.env.token;
 
       // set token to the value of the X-Api-Key header
-      var token = xApiKey.replace("Bearer ", "");
+      //var token = xApiKey.replace("Bearer ", "");
+
+      var token = xApiKey;
 
       // get environment variable size, if not set, set it to 256x256
       var size = process.env.size || "256x256";
