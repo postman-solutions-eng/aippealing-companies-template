@@ -70,7 +70,6 @@ paths:
               - gold
               - plush
               - platin
-              - kryptonite
             default: lego
           example: plush
         - name: mode
@@ -102,7 +101,7 @@ paths:
                   associations:
                     - name: 'Flowers'
                       type: 'product'
-                      material: 'kryptonite'
+                      material: 'lego'
                       url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
         '404':
           description: Not Found
