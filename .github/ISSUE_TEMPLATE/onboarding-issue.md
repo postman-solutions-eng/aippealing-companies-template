@@ -334,6 +334,7 @@ We could adjust the [preview environment's](https://automotive-demo.postman.co/w
 ## Advanced Features probably for another day 😅 
 
 - [ ] API contract generator
+- [ ] API fuzzing / naughty strings
 - [ ] Deployment to API gateways
 - [ ] Integration with APM
 - [ ] Integration Overview
