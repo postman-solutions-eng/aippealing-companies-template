@@ -92,10 +92,9 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
             } else {
               console.log("OpenAI did not return a valid response: " + response.body);
               // return a success response with a 200 status code and an object with message "OpenAI did not return a valid response"
-              return resolve(Service.successResponse(
-                { "message": "OpenAI did not return a valid response" },
-                200,
-              ));
+              return resolve(
+                { "message": "OpenAI did not return a valid response", "status": 200 },
+              );
             }
           }
         });
