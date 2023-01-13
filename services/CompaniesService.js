@@ -80,17 +80,21 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
         await request(options, function (error, response) {
           if (error) {
             console.log(error);
-            // throw new Error(error);
           } else {
-            // wrap in try catch to prevent errors
-            try {
-              var firstItem = JSON.parse(response.body).choices[0];
+            // test whether the response is valid json and contains choices array
+            var choices = JSON.parse(response.body).choices;
+            if (choices) {
+              var firstItem = choices[0];
               console.log(firstItem.text);
 
               // only take text until the first end of the sentence and remove any new lines and quotes
               productName = company + " " + firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
-            } catch (e) {
-              console.log(e);
+            } else {
+              console.log("OpenAI did not return a valid response: " + response.body);
+              // return a success response with a 200 status code and an object with message "OpenAI did not return a valid response"
+              return resolve(
+                { "message": "OpenAI did not return a valid response", "status": 200 },
+              );
             }
           }
         });
