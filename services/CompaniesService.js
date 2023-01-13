@@ -155,13 +155,17 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
           association.url = "https://user-images.githubusercontent.com/1872314/210279871-0ddf7100-a680-4e9a-9a28-2fcfbcf30355.png";
           if (error) {
             console.log(error);
-            //throw new Error(error);
           } else {
-            try {
-              var url = JSON.parse(response.body).data[0].url;
+            var data = JSON.parse(response.body).data;
+            if (data) {
+              var url = data[0].url;
               association.url = url;
-            } catch (e) {
-              console.log(e);
+            } else {
+              console.log("OpenAI did not return a valid response: " + response.body);
+              // return a success response with a 200 status code and an object with message "OpenAI did not return a valid response"
+              // override the default status code 500 with 200
+              response.statusCode = 200;
+              response.body = { "message": "OpenAI did not return a valid response", "status": 200 };
             }
           }
         });
