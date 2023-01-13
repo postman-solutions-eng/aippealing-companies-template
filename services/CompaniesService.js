@@ -91,6 +91,11 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
               productName = company + " " + firstItem.text.split(".")[0].replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "").trim();
             } else {
               console.log("OpenAI did not return a valid response: " + response.body);
+              // return a success response with a 200 status code and an object with message "OpenAI did not return a valid response"
+              return resolve(Service.successResponse(
+                { "message": "OpenAI did not return a valid response" },
+                200,
+              ));
             }
           }
         });
