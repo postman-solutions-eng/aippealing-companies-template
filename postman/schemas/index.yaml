@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.7'
+  version: '1.2.8'
   title: 'A(i)ppealing Companies'
   description: |-
 
@@ -134,9 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array   
-                items:
-                  $ref: '#/components/schemas/Company'
+                $ref: '#/components/schemas/Companies'
               example:
                 - id: yousendmeflowers
                   name: 'Fleurop / yousendmeflowers / main'
@@ -223,24 +221,33 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Companies:
+      type: array   
+      items:
+        $ref: '#/components/schemas/Company'
     Company:
       type: object
       properties:
         id:
           type: string
           description: The unique identifier of the company
+          example: yousendmeflowers
         name:
           type: string
           description: The name of the company
+          example: "YouSendMeFlowers / Fleurop"
         description:
           type: string
           description: The description of the company
+          example: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US.'
         city:
           type: string
           description: City associated with company
+          example: 'Amsterdam'
         motto:
           type: string
           description: Motto associated with company
+          example: 'Flowers across the globe'
         associations:
           type: array
           items:
@@ -266,22 +273,27 @@ components:
         name:
           type: string
           description: The name of the association
+          example: "Flowers"
         type:
           type: string
           description: The type of the association
           enum:
             - service
             - product
+          example: product
         description:
           type: string
           description: The description of the association
+          example: "Flowers made of lego"
         material:
           type: string
           description: The material of the association
+          example: lego
         url:
           type: string
           format: uri
           description: The a(i)ppealing image generated with the association 
+          example: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
       example:
         name: 'Lexus UX'
         material: 'lego'
@@ -295,6 +307,7 @@ components:
         message:
           description: A human readable error message
           type: string
+          example: 'Company not found'
   securitySchemes:
     ApiKey:
       type: apiKey
