@@ -134,9 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array   
-                items:
-                  $ref: '#/components/schemas/Company'
+                $ref: '#/components/schemas/Companies'
               example:
                 - id: yousendmeflowers
                   name: 'Fleurop / yousendmeflowers / main'
@@ -223,6 +221,10 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Companies:
+      type: array   
+      items:
+        $ref: '#/components/schemas/Company'
     Company:
       type: object
       properties:
