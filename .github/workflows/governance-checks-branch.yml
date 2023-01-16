@@ -94,7 +94,7 @@ jobs:
       - name: Run Contract tests on staging env
         if: github.ref == 'refs/heads/main'
         run: |
-          postman collection run "${{ secrets.POSTMAN_CONTRACT_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}" --env-var "env-server=https://aippealing-companies-staging.herokuapp.com"
+          postman collection run "${{ github.workspace }}/postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}" --env-var "env-server=https://aippealing-companies-staging.herokuapp.com"
           
       # if branch is main, run integration tests on staging environment
       - name: Run Integration tests on staging env
