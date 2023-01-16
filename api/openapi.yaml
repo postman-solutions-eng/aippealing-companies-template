@@ -32,7 +32,7 @@ info:
 
     <img src="https://user-images.githubusercontent.com/1872314/208321413-806d2afc-d3fb-4660-9299-7ca86be90e2f.png" alt="C-class%20made%20of%20gold%20(second%20run)" width="200">
   title: A(i)ppealing Companies
-  version: 1.2.6
+  version: 1.2.9
 servers:
 - description: Production Server
   url: https://aippealing-companies.herokuapp.com
@@ -212,9 +212,7 @@ paths:
                   url: https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png
                   material: plush
               schema:
-                items:
-                  $ref: '#/components/schemas/Company'
-                type: array
+                $ref: '#/components/schemas/Companies'
           description: OK
         "400":
           content:
@@ -240,6 +238,10 @@ paths:
       x-eov-operation-handler: controllers/CompaniesController
 components:
   schemas:
+    Companies:
+      items:
+        $ref: '#/components/schemas/Company'
+      type: array
     Company:
       example:
         name: Lexus
@@ -256,18 +258,24 @@ components:
       properties:
         id:
           description: The unique identifier of the company
+          example: yousendmeflowers
           type: string
         name:
           description: The name of the company
+          example: YouSendMeFlowers / Fleurop
           type: string
         description:
           description: The description of the company
+          example: Fleurop is a flower delivery service with a network of florists
+            in 140 countries. YouSendMeFlowers is a similar service in the US.
           type: string
         city:
           description: City associated with company
+          example: Amsterdam
           type: string
         motto:
           description: Motto associated with company
+          example: Flowers across the globe
           type: string
         associations:
           items:
@@ -285,21 +293,26 @@ components:
       properties:
         name:
           description: The name of the association
+          example: Flowers
           type: string
         type:
           description: The type of the association
           enum:
           - service
           - product
+          example: product
           type: string
         description:
           description: The description of the association
+          example: Flowers made of lego
           type: string
         material:
           description: The material of the association
+          example: lego
           type: string
         url:
           description: The a(i)ppealing image generated with the association
+          example: https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png
           format: uri
           type: string
       required:
@@ -309,6 +322,7 @@ components:
       properties:
         message:
           description: A human readable error message
+          example: Company not found
           type: string
       required:
       - message
