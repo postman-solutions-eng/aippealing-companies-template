@@ -15,6 +15,9 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-      - name: Run API tests
+      - name: Run API contract tests
+        run: |
+          postman collection run "${{ secrets.POSTMAN_CONTRACT_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}"
+      - name: Run API Integration tests
         run: |
           postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PROD }}" --iteration-data "data/companies.csv"
