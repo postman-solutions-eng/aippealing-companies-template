@@ -37,7 +37,7 @@ info:
     <img src="https://user-images.githubusercontent.com/1872314/208321413-806d2afc-d3fb-4660-9299-7ca86be90e2f.png" alt="C-class%20made%20of%20gold%20(second%20run)" width="200">
 
 servers:
-  - url: https://aippealing-companies.herokuapp.com
+  - url: http://aippealing-companies.herokuapp.com
     description: Production Server
   - url: https://aippealing-companies-staging.herokuapp.com
     description: Staging Server
