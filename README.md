@@ -9,7 +9,7 @@ Reference implementation is based on OpenAI (DALL-E, GPT-3).
 
 There are some amazing, visually appealing company products made of chocolate or lego
 
-<img width="197" alt="image" src="https://user-images.githubusercontent.com/1872314/208320977-06e18d27-4938-4be3-ab9d-8b2ffc2c85e1.png"> <img width="239" alt="image" src="https://user-images.githubusercontent.com/1872314/208321054-130afbaa-f7db-453e-8db1-114ebce97f4e.png">
+<img width="197" alt="image" src="https://user-images.githubusercontent.com/1872314/208320977-06e18d27-4938-4be3-ab9d-8b2ffc2c85e1.png"> <img width="239" alt="image" src="https://user-images.githubusercontent.com/1872314/208321054-130afbaa-f7db-453e-8db1-114ebce97f4e.png"><img src="https://user-images.githubusercontent.com/1872314/213943475-a74c1b47-20bc-4761-8d73-5e4d052fefc3.png" alt="Soccer%20Stadium%20made%20of%20Lego" width="350">
 
 Inspired by the image and text generation capabilities of [OpenAI](https://www.postman.com/devrel/workspace/openai/documentation/13183464-90abb798-cb85-43cb-ba3a-ae7941e968da), this API generates images of the products, companies are most known for, and turns them into gold, chocolate, lego or any other material.
 
