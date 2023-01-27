@@ -1,13 +1,15 @@
 # A(i)ppealing Companies :office: :arrow_right: :robot: :arrow_right: :chocolate_bar: :car: :framed_picture: 
 
-[![Postman Governance checks on branch](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml/badge.svg)](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml)
-
-[![Integration Tests Production](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/integration-tests-production.yml/badge.svg)](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/integration-tests-production.yml)
-
 [API](https://documenter.getpostman.com/view/24483733/2s8Z6yWseX) to create appealing images of company products made of chocolate, gold or lego.
 Reference implementation is based on OpenAI (DALL-E, GPT-3).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/24483733-47e300a5-2444-4bd9-b655-fe248d247a23?action=collection%2Ffork&collection-url=entityId%3D24483733-47e300a5-2444-4bd9-b655-fe248d247a23%26entityType%3Dcollection%26workspaceId%3D210e7615-f69f-4322-a87f-1d8135fe05bd#?env%5BDocuStaging%5D=W3sia2V5IjoiYmFzZVVybCIsInZhbHVlIjoiaHR0cHM6Ly9haXBwZWFsaW5nLWNvbXBhbmllcy1zdGFnaW5nLmhlcm9rdWFwcC5jb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
+
+[![Postman Governance checks on branch](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml/badge.svg)](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml)
+
+[![Integration Tests Production](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/integration-tests-production.yml/badge.svg)](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/integration-tests-production.yml)
+
+
 
 ## Motivation
 
