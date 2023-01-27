@@ -107,7 +107,7 @@ spec:
             }
         }
 
-        stage('Publish') {
+        stage('Publish newman reporter results') {
             steps {
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
             }
