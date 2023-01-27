@@ -101,9 +101,8 @@ spec:
         stage ('Run Governance Checks - newman') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID')]) {
-                    sh 'newman run "postman/collections/Governance Checks.json" --reporters cli,html,openapi,postman-cloud --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/schema.yaml --reporter-apiKey "${POSTMAN_API_KEY}" --reporter-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
+                    sh 'newman run "postman/collections/Governance Checks.json" --reporters cli,html,openapi,postman-cloud --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-apiKey "${POSTMAN_API_KEY}" --reporter-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
                 }
-                
             }
         }
 
