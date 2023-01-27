@@ -54,7 +54,7 @@ spec:
     stages {
         stage('Checkout code') {
             steps {
-                checkout()
+                checkout scm
             }
         }
         stage ('Install newman and postman CLI') {
