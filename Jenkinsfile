@@ -65,6 +65,7 @@ spec:
             }
         }
 
+        // also works with collections nested / embedded in an API if you use the collection UID from the Postman URL
         stage ('Run Governance Checks - newman') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID'), string(credentialsId: 'JONICO_POSTMAN_ENV_MOCK_STAGING', variable: 'POSTMAN_ENV_MOCK_STAGING'), string(credentialsId: 'JONICO_POSTMAN_GOVERNANCE_TESTS_COLLECTION', variable: 'POSTMAN_GOVERNANCE_TESTS_COLLECTION')]) {
