@@ -1,5 +1,4 @@
 def checkout () {
-    stage 'Checkout code'
     context="continuous-integration/jenkins/"
     context += isPRMergeBuild()?"pr-merge/checkout":"branch/checkout"
     def scmVars = checkout scm
