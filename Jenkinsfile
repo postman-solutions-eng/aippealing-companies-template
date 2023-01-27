@@ -90,6 +90,14 @@ spec:
             }
         }
 
+        stage('Publish newman reporter results') {
+            steps {
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                // publish junit test results
+                junit 'newman/*.xml'
+            }
+        }
+
         stage ('Run Contract Tests on staging - postman CLI') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_ENV_CONTRACT_TESTING', variable: 'POSTMAN_ENV_CONTRACT_TESTING'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID')]) {
@@ -103,14 +111,6 @@ spec:
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_ENV_STAGING', variable: 'POSTMAN_ENV_STAGING'), string(credentialsId: 'JONICO_POSTMAN_INTEGRATION_TESTS_COLLECTION', variable: 'POSTMAN_INTEGRATION_TESTS_COLLECTION')]) {
                     sh 'postman collection run "${POSTMAN_INTEGRATION_TESTS_COLLECTION}" -e "${POSTMAN_ENV_STAGING}" --iteration-data "data/companies.csv"'   
                 }
-            }
-        }
-
-        stage('Publish newman reporter results') {
-            steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-                // publish junit test results
-                junit 'newman/*.xml'
             }
         }
     }
