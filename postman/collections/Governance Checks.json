@@ -101,6 +101,12 @@
 					{
 						"key": "Accept",
 						"value": "application/json"
+					},
+					{
+						"key": "x-billing-token",
+						"value": "{{x-billing-token}}",
+						"type": "text",
+						"description": "optional billing token"
 					}
 				],
 				"url": {
@@ -196,6 +202,12 @@
 					{
 						"key": "Accept",
 						"value": "application/json"
+					},
+					{
+						"key": "x-billing-token",
+						"value": "{{x-billing-token}}",
+						"description": "optional billing token",
+						"type": "text"
 					}
 				],
 				"url": {
