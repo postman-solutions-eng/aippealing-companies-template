@@ -1,3 +1,27 @@
+const pm = require('@postman/postman-sdk');
+
+// retrieve collectionId and apiKey from environment variables, if not set then use default values
+const collectionId = process.env.POSTMAN_LIVE_COLLECTION_ID || '24435735-ac9b2109-076d-4132-a38b-75229a0fc795';
+const apiKey = process.env.POSTMAN_LIVE_API_KEY || 'PMAK-redacted';
+
+pm.initialize({
+  collectionId: collectionId,
+  apiKey: apiKey,
+  truncateData: false,
+  debug: false,
+  redactSensitiveData: {
+    enable: true,
+    rules: {
+      // need regexp for openai key starting with sk- , followed by 48 characters
+      open_api_key: 'sk-[a-zA-Z0-9]{48}',
+      // regexp for a postman api 
+      api_key: 'PMAK-[a-zA-Z0-9]{59}',
+      email_rule: '([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})',
+      bearerToken: '[bB]earer ([a-zA-Z]+[0-9]|[0-9]+[a-zA-Z]])[a-zA-Z0-9/+_.-]{15,1000}(?![a-zA-Z0-9/+.-])'
+    }
+  }
+});
+
 const config = require('./config');
 const logger = require('./logger');
 const ExpressServer = require('./expressServer');
