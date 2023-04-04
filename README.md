@@ -1,9 +1,9 @@
 # A(i)ppealing Companies :office: :arrow_right: :robot: :arrow_right: :chocolate_bar: :car: :framed_picture: 
 
-[API](https://documenter.getpostman.com/view/24483733/2s8Z6yWseX) to create appealing images of company products made of chocolate, gold or lego.
+[API](https://auto-demo.postmansolutions.com) to create appealing images of company products made of chocolate, gold or lego.
 Reference implementation is based on OpenAI (DALL-E, GPT-3).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/24483733-47e300a5-2444-4bd9-b655-fe248d247a23?action=collection%2Ffork&collection-url=entityId%3D24483733-47e300a5-2444-4bd9-b655-fe248d247a23%26entityType%3Dcollection%26workspaceId%3D210e7615-f69f-4322-a87f-1d8135fe05bd#?env%5BDocuStaging%5D=W3sia2V5IjoiYmFzZVVybCIsInZhbHVlIjoiaHR0cHM6Ly9haXBwZWFsaW5nLWNvbXBhbmllcy1zdGFnaW5nLmhlcm9rdWFwcC5jb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/24483733-cc806d3a-75bf-4025-bfb1-b399b10ba03d?action=collection%2Ffork&collection-url=entityId%3D24483733-cc806d3a-75bf-4025-bfb1-b399b10ba03d%26entityType%3Dcollection%26workspaceId%3D210e7615-f69f-4322-a87f-1d8135fe05bd#?env%5BPublicMock%5D=W3sia2V5IjoiYmFzZVVybCIsInZhbHVlIjoiaHR0cHM6Ly9lYjIwMmRkYi1kMTNmLTRiZjctYmFjYS1hYWVhMmE3NWEwM2EubW9jay5wc3Rtbi5pbyIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0Iiwic2Vzc2lvblZhbHVlIjoiaHR0cHM6Ly9lYjIwMmRkYi1kMTNmLTRiZjctYmFjYS1hYWVhMmE3NWEwM2EubW9jay5wc3Rtbi5pbyIsInNlc3Npb25JbmRleCI6MH0seyJrZXkiOiJPcGVuQUlUb2tlbiIsInZhbHVlIjoiPHlvdSBkb24ndCBuZWVkIGFueSByZWFsIHRva2VuIGZvciB0aGUgbW9jayBzZXJ2ZXI+IiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InNlY3JldCIsInNlc3Npb25WYWx1ZSI6Im1vY2stdG9rZW4iLCJzZXNzaW9uSW5kZXgiOjF9XQ==)
 
 [![Postman Governance checks on branch](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml/badge.svg)](https://github.com/jonico/aippealing-companies-impl-openai/actions/workflows/governance-checks-branch.yml)
 
@@ -35,8 +35,7 @@ Inspired by the image and text generation capabilities of [OpenAI](https://www.p
 
 ## Trying it out :office: :arrow_right: :robot: :arrow_right: :chocolate_bar: :car: :framed_picture:  :tada: 
 
-Follow the [generated API documentation](https://documenter.getpostman.com/view/24483733/2s8Z6yWseX) and click the "Run in Postman" button
-
+Follow the [generated API documentation](https://auto-demo.postmansolutions.com) and click the "Run in Postman" button
 
 <img width="1290" alt="image" src="https://user-images.githubusercontent.com/1872314/208407634-c0a48387-56cc-44f1-9c16-59041a32e903.png">
 
