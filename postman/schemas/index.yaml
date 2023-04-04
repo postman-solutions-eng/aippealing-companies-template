@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.2.14'
+  version: '1.2.15'
   title: 'A(i)ppealing Companies'
   contact:
     name: Postman A(i)ppealing company
@@ -167,7 +167,7 @@ paths:
                       url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
                 - id: "volkswagen"
                   name: 'Volkswagen'
-                  description: 'Volkswagen AG is a German multinational automotive manufacturing company headquartered in Wolfsburg, Lower Saxony, Germany.'
+                  description: 'Volkswagen AG is a German multinational automotive manufacturing company headquartered in Wolfsburg, Lower Saxony, Germany. Its software is produced by Cariad'
                   city: 'Wolfsburg'
                   motto: 'Das Auto'
                   associations:
