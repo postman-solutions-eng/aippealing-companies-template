@@ -165,7 +165,7 @@
 							"",
 							"// iterate through the response and filter all the items where company name is fuzzy matched the company variable",
 							"var filtered = jsonData.filter(function (item) {",
-							"  return item.name.toLowerCase().includes(company.toLowerCase());",
+							"  return item.name.toLowerCase().includes(company.toLowerCase()) || item.description.toLowerCase().includes(company.toLowerCase());",
 							"});",
 							"",
 							"// test whether the filtered array has exactly one item",
