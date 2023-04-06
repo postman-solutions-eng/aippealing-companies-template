@@ -45,10 +45,10 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
 
       var request = require('request-promise');
 
-      // if mode is fuzzy, iterate through the curated items and filter all the items where company name is fuzzy matched the company variable or the variable is part of the company description
+      // if mode is fuzzy, iterate through the curated items and filter all the items where company name is fuzzy matched the company variable
       if (mode == "fuzzy") {
         filtered = companies.filter(function (item) {
-          return item.name.toLowerCase().includes(company.toLowerCase()) || item.description.toLowerCase().includes(company.toLowerCase());
+          return item.name.toLowerCase().includes(company.toLowerCase());
         });
       } else if (mode == "exact") {
         // if mode is direct, iterate through akk curated items and only return an item if its id is equal to the company variable
