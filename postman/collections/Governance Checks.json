@@ -369,13 +369,13 @@
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "key",
-				"value": "X-Api-Key",
+				"key": "value",
+				"value": "{{OpenAIToken}}",
 				"type": "string"
 			},
 			{
-				"key": "value",
-				"value": "<API Key>",
+				"key": "key",
+				"value": "X-Api-Key",
 				"type": "string"
 			},
 			{
@@ -389,7 +389,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "37e1eab3-ba28-45fd-a93a-02ffbe46a7a5",
+				"id": "ef08d628-616e-42d0-b805-717dadc1f843",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -399,7 +399,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "5b2c8fb4-4f6a-4d1b-add0-ddcbe348e007",
+				"id": "a02ab9a7-0053-4207-8da9-1b332b1f57fb",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -409,44 +409,44 @@
 	],
 	"variable": [
 		{
-			"id": "d1e3f7e8-6140-4ecf-8c83-44f4a59b461d",
+			"id": "907e57d7-b59c-465b-a5b4-19ab8d08549f",
 			"key": "product",
 			"value": ""
 		},
 		{
-			"id": "30d2adb3-4a99-469e-af89-0c4424c2ba74",
+			"id": "607d9e32-f367-468f-b658-80fe81b41e16",
 			"key": "markdown",
 			"value": ""
 		},
 		{
-			"id": "e963c3a7-b834-47ba-bb34-35e1c388b534",
+			"id": "9466df20-af52-4f5f-87b5-220d5b662928",
 			"key": "company",
 			"value": "yousendmeflowers"
 		},
 		{
-			"id": "7e8b8189-b646-4634-aba6-fadb515f2bde",
+			"id": "2fb1ff60-6c7c-4b8c-8c5f-435588bb9aab",
 			"key": "companyRecord",
 			"value": ""
 		},
 		{
-			"id": "c0daac82-5a26-442d-a6a3-ebaa81b1489f",
+			"id": "95bcb4e6-b82a-471f-a1a5-c4dfc96dfd98",
 			"key": "randomItem",
 			"value": ""
 		},
 		{
-			"id": "3f9f3d89-a3a1-4380-8ec9-3facce773e33",
+			"id": "4e9538e4-c45b-4baa-9c35-1884c268f2ba",
 			"key": "material",
 			"value": "lego",
 			"type": "string"
 		},
 		{
-			"id": "db3d2b19-181b-42eb-a721-b40df23acb03",
+			"id": "1e233c2b-9c35-4921-bb86-401262496d66",
 			"key": "expectedStatus",
 			"value": "200",
 			"type": "string"
 		},
 		{
-			"id": "c4b61795-119c-4f76-a256-59148e4e610e",
+			"id": "024b43d5-a046-4b8d-a3d0-256049cd7c40",
 			"key": "mode",
 			"value": "fuzzy",
 			"type": "string"
