@@ -12,6 +12,7 @@ README.md
 expressServer.js
 package.json
 config.js
+index.js
 controllers/Controller.js
 services/CompaniesService.js
 
