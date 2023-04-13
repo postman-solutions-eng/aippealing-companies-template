@@ -2,7 +2,6 @@
 api/openapi.yaml
 controllers/CompaniesController.js
 controllers/index.js
-index.js
 logger.js
 services/Service.js
 services/index.js
