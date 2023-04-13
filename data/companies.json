@@ -1,10 +1,9 @@
 [
   {
       "id": "yousendmeflowers",
-      "message": "This is a mock server, for production use, please set the baseUrl to https://aippealing-companies.herokuapp.com/",
       "name": "Fleurop / yousendmeflowers / main",
-      "city": "{{$randomCity}}",
-      "motto": "{{$randomCatchPhrase}}",
+      "city": "Amsterdam",
+      "motto": "Bring joy with flowers",
       "description": "Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.",
       "associations": [
           {
