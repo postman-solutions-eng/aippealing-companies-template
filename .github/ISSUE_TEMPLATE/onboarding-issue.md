@@ -1,7 +1,7 @@
 ---
 name: Onboarding Issue
 about: Onboard a new developer to our API-first approach
-title: ''
+title: 'Onboarding Issue'
 labels: onboarding
 assignees: ''
 
@@ -188,11 +188,8 @@ Tell the requestor that you are on it and resolve the comment
 
 <img width="1039" alt="image" src="https://user-images.githubusercontent.com/1872314/210020028-5b12d752-a1bf-4e24-8371-09f8523ff2cb.png">
 
-- [ ] You will recognise that the test suite of our API will fail in the PR as our example is neither included in the list of curated company examples nor in the `data/companies.csv` data file. Please add the specific parts by yourself or have a colleague help you.
 
-![image](https://user-images.githubusercontent.com/1872314/210020309-648eeea5-6273-4474-b312-76aabe7053d0.png)
-
-- [ ] Even after the initial fixes, the test cases will still fail as the Mock Server for the API conformance does not know anything about our company yet, let's examine the log
+- [ ] You will recognize, that the test cases will still fail as the Mock Server for the API conformance does not know anything about our company yet, let's examine the log
 
 ![image](https://user-images.githubusercontent.com/1872314/210017330-f5cb4e1a-4f9e-4237-bf60-cff9c22010fc.png)
 
