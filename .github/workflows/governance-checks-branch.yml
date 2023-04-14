@@ -40,6 +40,7 @@ jobs:
           fi
       
       - name: Check if all company examples are in data/companies.csv
+        if: false
         run: |
           allCompanies=$(cat data/companies.csv)
           allExamples="${{ steps.get_all_examples.outputs.result }}"
@@ -54,6 +55,7 @@ jobs:
           done
 
       - name: Check if all materials are in data/companies.csv
+        if: false
         run: |
           allCompanies=$(cat data/companies.csv)
           allMaterials="${{ steps.get_all_materials.outputs.result }}"

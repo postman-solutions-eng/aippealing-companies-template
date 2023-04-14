@@ -1,113 +1,113 @@
 [
-  {
+    {
       "id": "yousendmeflowers",
       "name": "Fleurop / yousendmeflowers / main",
-      "city": "Amsterdam",
-      "motto": "Bring joy with flowers",
+      "city": "{{$randomCity}}",
+      "motto": "{{$randomCatchPhrase}}",
       "description": "Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.",
       "associations": [
-          {
-              "name": "Flowers",
-              "type": "product",
-              "material": "lego",
-              "url": "https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png"
-          }
+        {
+          "name": "Flowers",
+          "type": "product",
+          "material": "lego",
+          "url": "https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png"
+        }
       ]
-  },
-  {
+    },
+    {
       "id": "volkswagen",
       "name": "Volkswagen",
-      "description": "Volkswagen AG is a German multinational automotive manufacturing company headquartered in Wolfsburg, Lower Saxony, Germany.",
+      "description": "Volkswagen AG is a German multinational automotive manufacturing company.",
       "city": "Wolfsburg",
       "motto": "Das Auto",
       "associations": [
-          {
-              "name": "VW Caravan",
-              "type": "product",
-              "material": "lego",
-              "url": "https://user-images.githubusercontent.com/1872314/208270572-17d0d771-17d5-4e95-ab1c-6ebc86432bb9.png"
-          },
-          {
-              "name": "Porsche 911",
-              "type": "product",
-              "material": "lego",
-              "url": "https://user-images.githubusercontent.com/1872314/208270526-6b8dd152-674e-4496-835f-671882e70d1b.png"
-          }
+        {
+          "name": "VW Caravan",
+          "type": "product",
+          "material": "lego",
+          "url": "https://user-images.githubusercontent.com/1872314/208270572-17d0d771-17d5-4e95-ab1c-6ebc86432bb9.png"
+        },
+        {
+          "name": "Porsche 911",
+          "type": "product",
+          "material": "lego",
+          "url": "https://user-images.githubusercontent.com/1872314/208270526-6b8dd152-674e-4496-835f-671882e70d1b.png"
+        }
       ]
-  },
-  {
+    },
+    {
       "id": "lexus",
       "name": "Lexus",
       "city": "Toyota",
       "motto": "The Pursuit of Perfection",
       "description": "Lexus is the luxury vehicle division of the Japanese automaker Toyota. The Lexus brand is marketed in more than 70 countries and territories worldwide and has become Japan's largest-selling make of premium cars.",
       "associations": [
-          {
-              "name": "Lexus UX",
-              "type": "product",
-              "material": "chocolate",
-              "url": "https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png"
-          }
+        {
+          "name": "Lexus UX",
+          "type": "product",
+          "material": "chocolate",
+          "url": "https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png"
+        }
       ]
-  },
-  {
+    },
+    {
       "id": "allianz",
       "name": "Allianz",
       "city": "Munich",
       "motto": "Together. Stronger.",
       "description": "Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.",
       "associations": [
-          {
-              "name": "Allianz Arena",
-              "type": "product",
-              "material": "chocolate",
-              "url": "https://user-images.githubusercontent.com/1872314/208270631-87b3c79c-c6e8-47dd-9cf2-52451989b83b.png"
-          }
+        {
+          "name": "Allianz Arena",
+          "type": "product",
+          "material": "chocolate",
+          "url": "https://user-images.githubusercontent.com/1872314/208270631-87b3c79c-c6e8-47dd-9cf2-52451989b83b.png"
+        }
       ]
-  },
-  {
+    },
+    {
       "id": "becks",
       "name": "Becks",
       "city": "Bremen",
       "motto": "Make it your Beck's",
       "description": "German brewing company founded in 1873",
       "associations": [
-          {
-              "name": "beer",
-              "type": "product",
-              "url": "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png",
-              "material": "gold"
-          }
+        {
+          "name": "beer",
+          "type": "product",
+          "url": "https://user-images.githubusercontent.com/1872314/209992238-fca4ddbe-3f11-4d92-a4e9-de568d9538b3.png",
+          "material": "gold"
+        }
       ]
-  },
-  {
+    },
+    {
       "id": "daimler",
       "name": "Daimler",
       "city": "Stuttgart, Germany",
       "motto": "The Best or Nothing",
       "description": "a German multinational automotive corporation",
       "associations": [
-          {
-              "name": "Mercedes e-class",
-              "type": "product",
-              "url": "https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png",
-              "material": "plush"
-          }
+        {
+          "name": "Mercedes e-class",
+          "type": "product",
+          "url": "https://user-images.githubusercontent.com/1872314/210013865-1a047e2b-f44a-4a1b-a0cc-dbbdce7ed724.png",
+          "material": "plush"
+        }
       ]
-  },
-  {
-      "id": "siemens",
-      "name": "siemens",
-      "city": "Munich, Germany",
-      "motto": "Innovations for a better future",
-      "description": "a German multinational engineering and technology company headquartered in Munich",
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "city": "San Francisco",
+      "motto": "Create better APIs—faster",
+      "description": "Postman is an API platform for building and using APIs.",
       "associations": [
-          {
-              "name": "Siemens eq9 automated coffeee machine",
-              "type": "product",
-              "url": "https://user-images.githubusercontent.com/1872314/213773899-e4806368-cf7a-420a-aba6-40f6e9fa6c08.png",
-              "material": "lego"
-          }
+        {
+          "name": "Postmanaut",
+          "type": "product",
+          "material": "wood",
+          "url": "https://user-images.githubusercontent.com/1872314/232126038-c9157dc9-e8d5-4e2a-aab2-d925d690ec7f.png"
+        }
       ]
-  }
-]
+    }
+  ]
