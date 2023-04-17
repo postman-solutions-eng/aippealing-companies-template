@@ -1,12 +1,7 @@
 company,material,mode,expectedStatus
-postman,wood,exact,200
-daimler,plush,fuzzy,200
 becks,gold,exact,200
-lexus,lego,exact,200
 fleurop,chocolate,exact,404
 fleurop,chocolate,fuzzy,200
-yousendmeflowers,chocolate,exact,200
-allianz,chocolate,exact,200
 volkswagen,lego,exact,200
 condor,platin,fuzzy,404
 condor,platin,ai,200

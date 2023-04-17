@@ -82,14 +82,6 @@ spec:
             }
         }
 
-        stage('Publish newman reporter results') {
-            steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-                // publish junit test results
-                junit 'newman/*.xml'
-            }
-        }
-
         stage ('Login - postman CLI') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY')]) {
@@ -114,6 +106,15 @@ spec:
                 }
             }
         }
-
+    }
+    post {
+        always {
+            steps {
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                // publish junit test results
+                junit 'newman/*.xml'
+            }
+        }
+        }
     }
 }
