@@ -109,11 +109,9 @@ spec:
     }
     post {
         always {
-            steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-                // publish junit test results
-                junit 'newman/*.xml'
-            }
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+            // publish junit test results
+            junit 'newman/*.xml'
         }
     }
 }
