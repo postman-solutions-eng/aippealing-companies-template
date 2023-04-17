@@ -1,4 +1,5 @@
 company,material,mode,expectedStatus
+postman,wood,exact,200
 daimler,plush,fuzzy,200
 becks,gold,exact,200
 lexus,lego,exact,200
