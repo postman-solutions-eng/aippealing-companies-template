@@ -115,6 +115,5 @@ spec:
                 junit 'newman/*.xml'
             }
         }
-        }
     }
 }
