@@ -4,5 +4,8 @@
   "includeTests": true,
   "syncPostman": false,
   "runNewman": true,
-  "baseUrl": "https://57c39747-9edd-4d1f-bc93-da508fa87c6f.mock.pstmn.io"
+  "portmanConfigFile": "portman-config.json",
+  "newmanRunOptions": {
+    "abortOnFailure":false
+  }
 }
