@@ -1,0 +1,11 @@
+{
+  "local": "postman/schemas/index.yaml",
+  "output": "collection.postman.json",
+  "includeTests": true,
+  "syncPostman": true,
+  "runNewman": true,
+  "portmanConfigFile": "portman-config.json",
+  "newmanRunOptions": {
+    "abortOnFailure":false
+  }
+}
