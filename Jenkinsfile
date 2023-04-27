@@ -57,11 +57,20 @@ spec:
                 checkout scm
             }
         }
-        stage ('Install newman and postman CLI') {
+        stage ('Install newman, portman and postman CLI') {
             steps {
             
                 sh 'curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh'
                 sh 'npm install -g newman && npm install -g newman-reporter-html && npm install -g newman-reporter-openapi && npm install -g newman-reporter-postman-cloud && npm install -g newman-reporter-xunit'
+                sh 'npm install -g @apideck/portman'
+            }
+        }
+
+        stage ('Run Contract Tests with portman - embedded newman') {
+            steps {
+                withCredentials([string(credentialsId: 'JONICO_POSTMAN_ENV_CONTRACT_TESTING', variable: 'POSTMAN_ENV_CONTRACT_TESTING'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID')]) {
+                    sh 'PORTMAN_API_KEY=sk-foobar portman --cliOptionsFile portman-cli.json'
+                }
             }
         }
 
@@ -99,7 +108,7 @@ spec:
             }
         }
 
-        stage ('Run Contract Tests on staging - postman CLI') {
+        stage ('Run Contract Tests from contract test generator on staging - postman CLI') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_ENV_CONTRACT_TESTING', variable: 'POSTMAN_ENV_CONTRACT_TESTING'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID')]) {
                     sh 'postman collection run "postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${INTEGRATION_ID}-${JOB_NAME}${BUILD_NUMBER}" -e "${POSTMAN_ENV_CONTRACT_TESTING}" --env-var "env-server=https://aippealing-companies-staging.herokuapp.com"'
