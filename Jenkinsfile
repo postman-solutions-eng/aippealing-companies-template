@@ -67,7 +67,9 @@ spec:
 
         stage ('Use portman to generated contract tests and run against prod with embedded newman and upload updated collection to Postman') {
             steps {
-                sh 'PORTMAN_API_KEY=sk-foobar portman --cliOptionsFile portman-cli.json'
+                withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_PORTMAN_COLLECTION_ID', variable: 'JONICO_PORTMAN_COLLECTION_ID'), string(credentialsId: 'JONICO_PROD_BASE_URL', variable: 'JONICO_PROD_BASE_URL')]) {
+                    sh 'PORTMAN_API_KEY="sk-foo" POSTMAN_API_KEY="${POSTMAN_API_KEY}" portman -b "${JONICO_PROD_BASE_URL}"  -p "${JONICO_PORTMAN_COLLECTION_ID}" --collectionName "Generated Portman Tests"  --cliOptionsFile portman-cli.json'
+                }
             }
         }
 
