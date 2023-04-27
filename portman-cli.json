@@ -2,7 +2,7 @@
   "local": "postman/schemas/index.yaml",
   "output": "collection.postman.json",
   "includeTests": true,
-  "syncPostman": false,
+  "syncPostman": true,
   "runNewman": true,
   "portmanConfigFile": "portman-config.json",
   "newmanRunOptions": {
