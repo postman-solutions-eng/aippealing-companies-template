@@ -75,8 +75,8 @@ spec:
 
         stage ('Run generated portman contract tests again using standlone newman and staging env and upload run results to Postman') {
             steps {
-                withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID'), string(credentialsId: 'JONICO_POSTMAN_ENV_STAGING', variable: 'POSTMAN_ENV_STAGING')]) {
-                    sh 'newman run collection.postman.json -e "https://api.getpostman.com/environments/${POSTMAN_ENV_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-apiKey "${POSTMAN_API_KEY}" --reporter-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
+                withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID'), string(credentialsId: 'JONICO_POSTMAN_ENV_STAGING', variable: 'POSTMAN_ENV_STAGING'), string(credentialsId: 'JONICO_PORTMAN_COLLECTION_ID', variable: 'JONICO_PORTMAN_COLLECTION_ID')]) {
+                    sh 'newman run "https://api.getpostman.com/collections/${JONICO_PORTMAN_COLLECTION_ID}?apikey=${POSTMAN_API_KEY}" -e "https://api.getpostman.com/environments/${POSTMAN_ENV_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-postman-cloud-apiKey "${POSTMAN_API_KEY}" --reporter-postman-cloud-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
                 }
             }
         }
@@ -85,7 +85,7 @@ spec:
         stage ('Run Governance Checks - newman') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID'), string(credentialsId: 'JONICO_POSTMAN_ENV_MOCK_STAGING', variable: 'POSTMAN_ENV_MOCK_STAGING'), string(credentialsId: 'JONICO_POSTMAN_GOVERNANCE_TESTS_COLLECTION', variable: 'POSTMAN_GOVERNANCE_TESTS_COLLECTION')]) {
-                    sh 'newman run "https://api.getpostman.com/collections/${POSTMAN_GOVERNANCE_TESTS_COLLECTION}?apikey=${POSTMAN_API_KEY}" -e "https://api.getpostman.com/environments/${POSTMAN_ENV_MOCK_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-apiKey "${POSTMAN_API_KEY}" --reporter-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
+                    sh 'newman run "https://api.getpostman.com/collections/${POSTMAN_GOVERNANCE_TESTS_COLLECTION}?apikey=${POSTMAN_API_KEY}" -e "https://api.getpostman.com/environments/${POSTMAN_ENV_MOCK_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-postman-cloud-apiKey "${POSTMAN_API_KEY}" --reporter-postman-cloud-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}"'
                 }
             }
         }
@@ -93,7 +93,7 @@ spec:
         stage ('Run Integration Tests - newman') {
             steps {
                 withCredentials([string(credentialsId: 'JONICO_POSTMAN_API_KEY', variable: 'POSTMAN_API_KEY'), string(credentialsId: 'JONICO_WORKSPACE_ID', variable: 'WORKSPACE_ID'), string(credentialsId: 'JONICO_INTEGRATION_ID', variable: 'INTEGRATION_ID'), string(credentialsId: 'JONICO_POSTMAN_ENV_STAGING', variable: 'POSTMAN_ENV_STAGING'), string(credentialsId: 'JONICO_POSTMAN_INTEGRATION_TESTS_COLLECTION', variable: 'POSTMAN_INTEGRATION_TESTS_COLLECTION')]) {
-                    sh 'newman run "https://api.getpostman.com/collections/${POSTMAN_INTEGRATION_TESTS_COLLECTION}?apikey=${POSTMAN_API_KEY}" -e "https://api.getpostman.com/environments/${POSTMAN_ENV_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-apiKey "${POSTMAN_API_KEY}" --reporter-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}" --iteration-data "data/companies.csv"'
+                    sh 'newman run "https://api.getpostman.com/collections/${POSTMAN_INTEGRATION_TESTS_COLLECTION}?apikey=${POSTMAN_API_KEY}" -e "https://api.getpostman.com/environments/${POSTMAN_ENV_STAGING}?apikey=${POSTMAN_API_KEY}" --reporters cli,html,openapi,postman-cloud,xunit --reporter-html-export target/pipelineReport.html --reporter-openapi-spec postman/schemas/index.yaml --reporter-postman-cloud-apiKey "${POSTMAN_API_KEY}" --reporter-postman-cloud-workspaceId ${WORKSPACE_ID} --reporter-integrationIdentifier "${WORKSPACE_ID}-${JOB_NAME}${BUILD_NUMBER}" --iteration-data "data/companies.csv"'
                 }
             }
         }
