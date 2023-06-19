@@ -158,7 +158,7 @@ jobs:
             Release notes:
             ${RELEASE_NOTES}
             
-            You can watch the progress and authorize access [here](${log_url}).
+            You can watch the progress [here](${log_url}).
             `;
             
             await github.issues.createComment({
@@ -175,6 +175,9 @@ jobs:
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       
       - name: Creating Postman release
         id: create-release
