@@ -154,9 +154,6 @@ jobs:
             
             const commentBody = `\
             👋 __${context.actor}__, creating Postman release __${RELEASE_NAME}__ for Git branch __${REF}__ now ...
-
-            Release notes:
-            ${RELEASE_NOTES}
             
             You can watch the progress [here](${log_url}).
             `;
@@ -212,15 +209,13 @@ jobs:
             ### Postman release created successfully :tada:
 
             * :seedling: __Release-Name__: ${RELEASE_NAME}
-            * :link: __Version-Link__: ${{ steps.create-release.outputs.version_link }}
+            * :link: [__Version-Link__](${{ steps.create-release.outputs.version_link }})
 
             <details>
             
             <summary>📖 Release notes:</summary>
             
-            \`\`\`
             ${RELEASE_NOTES}
-            \`\`\`
 
             </details>
             
