@@ -1,0 +1,275 @@
+name: Postman IssueOps commands
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  prechecks:
+    name: Permission pre-check
+    if: github.event.issue.pull_request != null && (startsWith(github.event.comment.body, '/pm-release') || startsWith(github.event.comment.body, '/ps-publish'))
+    outputs:
+      ref: ${{steps.prechecks.outputs.ref}}
+      eyes: ${{steps.prechecks.outputs.eyes}}
+      sha: ${{steps.prechecks.outputs.sha}}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check permissions and PR ref
+      id: prechecks
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const reactionRes = await github.reactions.createForIssueComment({
+            ...context.repo,
+            comment_id: ${{github.event.comment.id}},
+            content: 'eyes'
+          })
+
+          core.setOutput('eyes', reactionRes.data.id)
+
+          const permissionRes = await github.repos.getCollaboratorPermissionLevel(
+            {
+              ...context.repo,
+              username: context.actor
+            }
+          )
+          if (permissionRes.status !== 200) {
+            message = 'Permission check returns non-200 status: ${permissionRes.status}'
+            core.setOutput('error', message)
+            throw new Error(message)
+          }
+          const actorPermission = permissionRes.data.permission
+          if (!['admin', 'write'].includes(actorPermission)) {
+              message = '👋  __' + context.actor + '__, seems as if you have not admin/write permission to run /pm-* commands, permissions: ${actorPermission}'
+              core.setOutput('error', message)
+              throw new Error(message)
+          }
+
+          pr = await github.pulls.get(
+            {
+              ...context.repo,
+              pull_number: context.issue.number
+            }
+          )
+
+          if (pr.status !== 200) {
+            message = 'Could not retrieve PR info: ${permissionRes.status}'
+            core.setOutput('error', message)
+            throw new Error(message)
+          }
+
+          core.setOutput('ref', pr.data.head.ref)
+          core.setOutput('sha', pr.data.head.sha)
+
+    - name: Pre-Check-Failed
+      id: precheck-failed
+      if: failure()
+      uses: actions/github-script@v6
+      env:
+        message: ${{steps.prechecks.outputs.error}}
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
+          const { message } = process.env;
+          // check if message is null or empty
+          if (!message || message.length === 0) {
+            message = 'Unknown error, [check logs](' + log_url + ') for more details.'
+          }
+
+          github.issues.createComment({
+            ...context.repo,
+            issue_number: context.issue.number,
+            body: message
+          })
+
+          await github.reactions.createForIssueComment({
+            ...context.repo,
+            comment_id: ${{github.event.comment.id}},
+            content: '-1'
+          })
+
+          await github.reactions.deleteForIssueComment({
+            ...context.repo,
+            comment_id: ${{github.event.comment.id}},
+            reaction_id: ${{steps.prechecks.outputs.eyes}}
+          })
+  
+  act-on-pm-release-request:
+    name: "/pm-release"
+    if: startsWith(github.event.comment.body, '/pm-release')
+    needs: [prechecks]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validating parameters
+        id: validate_params
+        env:
+          REF: ${{ needs.prechecks.outputs.ref }}
+          comment: ${{ github.event.comment.body }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { REF, comment } = process.env;
+
+            // check if comment starts with '/pm-release' and is only followed by whitespaces
+            const regexCommandWithoutParameters = /^\/pm-release\s*$/
+
+            // check if comment starts with '/pm-create' and is followed by release notes in double quotes
+            const regexCommandWithReleaseNotes = /^\/pm-release\s+"([^"]*)"\s*$/
+
+            // check if comment starts with '/pm-create' and is followed by a release name with only alphanumeric characters and '-' and '_'
+            const regexCommandWithReleaseName = /^\/pm-release\s+([a-zA-Z0-9-_]*)\s*$/
+
+            // check if comment starts with '/ps-create', is followed by a branch name with only alpha numeric characters and '-' and "_" and the followed by whitespaces and then a valid DDL
+            const regexCommandWithRelaseNameAndNotes = /^\/pm-release\s+([a-zA-Z0-9-_]+)\s*"([^"]*)"\s*$/
+            
+            RELEASE_NAME = REF
+            RELEASE_NOTES = "### New release from " + BRANCH_NAME
+
+            // check which of the four regexes above matches the comment, override RELASE_NAME and RELEASE_NOTES if present, error if none of the above matches
+            if (regexCommandWithoutParameters.test(comment)) {
+              core.info("Command without parameters")
+            } else if (regexCommandWithReleaseNotes.test(comment)) {
+              RELEASE_NOTES = comment.match(regexCommandWithReleaseNotes)[1]
+              core.info("Command with release notes: " + RELEASE_NOTES)
+            } else if (regexCommandWithReleaseName.test(comment)) {
+              RELEASE_NAME = comment.match(regexCommandWithReleaseName)[1]
+              core.info("Command with release name: " + RELEASE_NAME)
+            } else if (regexCommandWithRelaseNameAndNotes.test(comment)) {
+              RELEASE_NAME = comment.match(regexCommandWithRelaseNameAndNotes)[1]
+              RELEASE_NOTES = comment.match(regexCommandWithRelaseNameAndNotes)[2]
+              core.info("Command with release name and notes: " + RELEASE_NAME + " " + RELEASE_NOTES)
+            } else {
+              message = 'Invalid command, please use \`/pm-release "<release notes>"\` or \`/pm-release <release name>\` or \`/pm-release <release name> "<release notes>"\`'
+              core.setOutput('error', message)
+              throw new Error(message)
+            }
+
+            core.setOutput('RELEASE_NAME',  RELEASE_NAME)
+            core.setOutput('RELEASE_NOTES',  RELEASE_NOTES)
+            
+            const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
+            
+            const commentBody = `\
+            👋 __${context.actor}__, creating Postman release __${RELEASE_NAME}__ for Git branch __${REF}__ now ...
+
+            Release notes:
+            ${RELEASE_NOTES}
+            
+            You can watch the progress and authorize access [here](${log_url}).
+            `;
+            
+            await github.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            })
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.prechecks.outputs.ref }}
+    
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      
+      - name: Creating Postman release
+        id: create-release
+        timeout-minutes: 5
+        env:
+          RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
+          RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
+        run: | 
+            postman api publish "${{ secrets.POSTMAN_API_ID }}" --name "${RELEASE_NAME}" --api-definition "postman/schemas" --release-notes "${RELEASE_NOTES}" --collections postman/collections/*.json
+
+      - name: Create release succeeded
+        id: pm-release-succeeded
+        if: success()
+        uses: actions/github-script@v6
+        env:
+            RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
+            RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { RELEASE_NAME, RELEASE_NOTES } = process.env;
+            const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
+            
+            const commentBody = `\
+            ### Postman release created successfully :tada:
+
+            * :seedling: __Release-Name__: ${RELEASE_NAME}
+
+            <details>
+            
+            <summary>📖 Release notes:</summary>
+            
+            \`\`\`
+            ${RELEASE_NOTES}
+            \`\`\`
+
+            </details>
+            
+            `;
+            
+            github.issues.createComment({
+              ...context.repo,
+              issue_number: ${{ github.event.issue.number }},
+              body: commentBody
+            });
+
+            await github.reactions.createForIssueComment({
+              ...context.repo,
+              comment_id: ${{github.event.comment.id}},
+              content: '+1'
+            })
+
+            await github.reactions.deleteForIssueComment({
+              ...context.repo,
+              comment_id: ${{github.event.comment.id}},
+              reaction_id: ${{needs.prechecks.outputs.eyes}}
+            })
+
+      - name: /pm-release failed
+        id: pm-release-failed
+        if: cancelled() || failure()
+        uses: actions/github-script@v6
+        env:
+          REF: ${{ needs.prechecks.outputs.ref }}
+          message: ${{steps.validate_params.outputs.error}}
+          
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |              
+            const { REF, message } = process.env;
+            const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
+
+            if (message === null || message === '') {
+              errorMessage = `Creating Postman release failed for branch __${REF}__ :cry:. [View error logs](${log_url}).`
+            } else {
+              errorMessage = message
+            }
+
+            github.issues.createComment({
+                ...context.repo,
+                issue_number: ${{ github.event.issue.number }},
+                body: errorMessage
+              })
+
+
+            await github.reactions.createForIssueComment({
+              ...context.repo,
+              comment_id: ${{github.event.comment.id}},
+              content: '-1'
+            })
+
+            await github.reactions.deleteForIssueComment({
+              ...context.repo,
+              comment_id: ${{github.event.comment.id}},
+              reaction_id: ${{needs.prechecks.outputs.eyes}}
+            })
+
+  
