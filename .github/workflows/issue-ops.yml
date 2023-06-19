@@ -186,7 +186,8 @@ jobs:
           RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
           RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
         run: | 
-            postman api publish "${{ secrets.POSTMAN_API_ID }}" --name "${RELEASE_NAME}" --api-definition "postman/schemas" --release-notes "${RELEASE_NOTES}" --collections postman/collections/*.json
+            export POSTMAN_API_ID=$(grep 'id =' .postman/api | cut -d' ' -f3)
+            postman api publish "${POSTMAN_API_ID}" --name "${RELEASE_NAME}" --api-definition "postman/schemas" --release-notes "${RELEASE_NOTES}" --collections postman/collections/*.json
 
       - name: Create release succeeded
         id: pm-release-succeeded
