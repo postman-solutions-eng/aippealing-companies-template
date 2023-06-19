@@ -188,7 +188,7 @@ jobs:
       - name: Create release succeeded
         id: pm-release-succeeded
         if: success()
-        uses: actions/github-script@v6
+        uses: actions/github-script@v3
         env:
             RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
             RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
@@ -236,7 +236,7 @@ jobs:
       - name: /pm-release failed
         id: pm-release-failed
         if: cancelled() || failure()
-        uses: actions/github-script@v6
+        uses: actions/github-script@v3
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           message: ${{steps.validate_params.outputs.error}}
