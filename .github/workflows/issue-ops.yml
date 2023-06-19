@@ -126,7 +126,7 @@ jobs:
             const regexCommandWithRelaseNameAndNotes = /^\/pm-release\s+([a-zA-Z0-9-_]+)\s*"([^"]*)"\s*$/
             
             RELEASE_NAME = REF
-            RELEASE_NOTES = "### New release from " + BRANCH_NAME
+            RELEASE_NOTES = "### New release from " + RELEASE_NAME
 
             // check which of the four regexes above matches the comment, override RELASE_NAME and RELEASE_NOTES if present, error if none of the above matches
             if (regexCommandWithoutParameters.test(comment)) {
