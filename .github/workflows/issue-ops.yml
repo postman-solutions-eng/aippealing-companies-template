@@ -187,7 +187,7 @@ jobs:
           RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
         run: | 
           export POSTMAN_API_ID=$(grep 'id =' .postman/api | cut -d' ' -f3)
-          publish_output=$(postman api publish "${POSTMAN_API_ID}" --name "${RELEASE_NAME}" --api-definition "postman/schemas" --release-notes "${RELEASE_NOTES}" --collections postman/collections/*.json 2>&1 | tee publish_output.txt)
+          postman api publish "${POSTMAN_API_ID}" --name "${RELEASE_NAME}" --api-definition "postman/schemas" --release-notes "${RELEASE_NOTES}" --collections postman/collections/*.json | tee publish_output.txt
           version_link=$(grep -o 'https://go.postman.co/apis/[^"]*' publish_output.txt)
           if [ -z "$version_link" ]; then
             echo "Failed to extract version link from publish output"
