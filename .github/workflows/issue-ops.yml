@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Check permissions and PR ref
       id: prechecks
-      uses: actions/github-script@v3
+      uses: actions/github-script@v4
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
@@ -65,7 +65,7 @@ jobs:
     - name: Pre-Check-Failed
       id: precheck-failed
       if: failure()
-      uses: actions/github-script@v3
+      uses: actions/github-script@v4
       env:
         message: ${{steps.prechecks.outputs.error}}
       with:
@@ -107,7 +107,7 @@ jobs:
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           comment: ${{ github.event.comment.body }}
-        uses: actions/github-script@v3
+        uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -191,7 +191,7 @@ jobs:
       - name: Create release succeeded
         id: pm-release-succeeded
         if: success()
-        uses: actions/github-script@v3
+        uses: actions/github-script@v4
         env:
             RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
             RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
@@ -239,7 +239,7 @@ jobs:
       - name: /pm-release failed
         id: pm-release-failed
         if: cancelled() || failure()
-        uses: actions/github-script@v3
+        uses: actions/github-script@v4
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           message: ${{steps.validate_params.outputs.error}}
