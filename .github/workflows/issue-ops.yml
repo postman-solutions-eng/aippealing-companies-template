@@ -7,7 +7,7 @@ on:
 jobs:
   prechecks:
     name: Permission pre-check
-    if: github.event.issue.pull_request != null && (startsWith(github.event.comment.body, '/pm-release') || startsWith(github.event.comment.body, '/ps-publish'))
+    if: github.event.issue.pull_request != null && (startsWith(github.event.comment.body, '/pm-release') || startsWith(github.event.comment.body, '/pm-publish'))
     outputs:
       ref: ${{steps.prechecks.outputs.ref}}
       eyes: ${{steps.prechecks.outputs.eyes}}
@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Check permissions and PR ref
       id: prechecks
-      uses: actions/github-script@v6
+      uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
@@ -65,7 +65,7 @@ jobs:
     - name: Pre-Check-Failed
       id: precheck-failed
       if: failure()
-      uses: actions/github-script@v6
+      uses: actions/github-script@v3
       env:
         message: ${{steps.prechecks.outputs.error}}
       with:
@@ -107,7 +107,7 @@ jobs:
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           comment: ${{ github.event.comment.body }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
