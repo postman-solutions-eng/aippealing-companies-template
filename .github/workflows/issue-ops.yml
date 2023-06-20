@@ -213,9 +213,10 @@ jobs:
         run: |
             git config --local user.email "no-reply@postman.com"
             git config --local user.name "Postman Release Manager"
-            RELEASE_TAG="postman-releases/${RELEASE_NAME}"
-            git tag -a $RELEASE_TAG -m "Postman release $RELEASE_NAME at " + $version_link + "\n\n" + $RELEASE_NOTES
-            git push origin $RELEASE_TAG
+            export RELEASE_TAG= "postman-releases/${RELEASE_NAME}"
+            export RELEASE_MESSAGE = "Postman release ${RELEASE_NAME} at ${version_link}\n${RELEASE_NOTES}"
+            git tag -a "$RELEASE_TAG" -m "$RELEASE_MESSAGE"
+            git push origin "$RELEASE_TAG"
 
       - name: Create release succeeded
         id: pm-release-succeeded
@@ -308,7 +309,7 @@ jobs:
                 context: '/pm-release',
                 sha: SHA,
                 state: 'failure',
-                description: 'Crating Postman release ' + RELEASE_NAME + ' failed',
+                description: 'Creating Postman release failed',
                 target_url: log_url
               })
 
