@@ -154,7 +154,7 @@ jobs:
             const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
             
             const commentBody = `\
-            👋 __${context.actor}__, creating Postman release __${RELEASE_NAME}__ for Git branch __${REF}__ now ...
+            👋 __${context.actor}__, creating Postman release __${RELEASE_NAME}__ for Git branch __${REF}__ and tagging it ...
             
             You can watch the progress [here](${log_url}).
             `;
@@ -204,7 +204,7 @@ jobs:
           echo "version_link=$version_link" >> $GITHUB_OUTPUT
     
       - name: Create tag
-        id: create_tag
+        id: create-tag
         env:
             RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
             RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
@@ -217,6 +217,8 @@ jobs:
             export RELEASE_MESSAGE="Postman release ${RELEASE_NAME}"$'\n\n'"Release-Link: ${version_link}"
             git tag -a "$RELEASE_TAG" -m "$RELEASE_MESSAGE"
             git push origin "$RELEASE_TAG"
+            export GITHUB_TAG_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${RELEASE_TAG}"
+            echo "GITHUB_TAG_URL=${GITHUB_TAG_URL}" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Create release succeeded
@@ -227,7 +229,6 @@ jobs:
             RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
             RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
             SHA: ${{ needs.prechecks.outputs.sha }}
-            
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -249,6 +250,7 @@ jobs:
 
             * :seedling: __Release-Name__: ${RELEASE_NAME}
             * :link: [__Version-Link__](${{ steps.create-release.outputs.version_link }})
+            * :label: [__Git-Tag__](${{ steps.create-tag.outputs.GITHUB_TAG_URL }})
 
             <details>
             
