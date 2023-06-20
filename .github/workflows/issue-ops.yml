@@ -202,6 +202,20 @@ jobs:
             exit 1
           fi
           echo "version_link=$version_link" >> $GITHUB_OUTPUT
+    
+      - name: Create tag
+        id: create_tag
+        env:
+            RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
+            RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
+            version_link: ${{ steps.create-release.outputs.version_link }}
+        if: success()
+        run: |
+            git config --local user.email "no-reply@postman.com"
+            git config --local user.name "Postman Release Manager"
+            RELEASE_TAG="postman-releases/${RELEASE_NAME}"
+            git tag -a $RELEASE_TAG -m "Postman release $RELEASE_NAME at " + $version_link + "\n\n" + $RELEASE_NOTES
+            git push origin $RELEASE_TAG
 
       - name: Create release succeeded
         id: pm-release-succeeded
