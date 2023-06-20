@@ -107,11 +107,12 @@ jobs:
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           comment: ${{ github.event.comment.body }}
+          SHA: ${{ needs.prechecks.outputs.sha }}
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { REF, comment } = process.env;
+            const { REF, comment, SHA } = process.env;
 
             // check if comment starts with '/pm-release' and is only followed by whitespaces
             const regexCommandWithoutParameters = /^\/pm-release\s*$/
@@ -122,7 +123,7 @@ jobs:
             // check if comment starts with '/pm-create' and is followed by a release name with only alphanumeric characters and '-' and '_'
             const regexCommandWithReleaseName = /^\/pm-release\s+([a-zA-Z0-9-_]*)\s*$/
 
-            // check if comment starts with '/ps-create', is followed by a branch name with only alpha numeric characters and '-' and "_" and the followed by whitespaces and then a valid DDL
+            // check if comment starts with '/pm-create', is followed by a branch name with only alpha numeric characters and '-' and "_" and the followed by whitespaces and then a valid DDL
             const regexCommandWithRelaseNameAndNotes = /^\/pm-release\s+([a-zA-Z0-9-_]+)\s*"([^"]*)"\s*$/
             
             RELEASE_NAME = REF
@@ -164,6 +165,16 @@ jobs:
               body: commentBody
             })
 
+            // set commit status to pending
+            await github.repos.createCommitStatus({
+              ...context.repo,
+              context: '/pm-release',
+              sha: SHA,
+              state: 'pending',
+              description: 'Creating Postman release ' + RELEASE_NAME + ' ...',
+              target_url: log_url
+            })
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -199,11 +210,23 @@ jobs:
         env:
             RELEASE_NAME: ${{ steps.validate_params.outputs.RELEASE_NAME }}
             RELEASE_NOTES: ${{ steps.validate_params.outputs.RELEASE_NOTES }}
+            SHA: ${{ needs.prechecks.outputs.sha }}
+            
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { RELEASE_NAME, RELEASE_NOTES } = process.env;
+            const { RELEASE_NAME, RELEASE_NOTES, SHA } = process.env;
             const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
+
+            // set commit status to success
+            await github.repos.createCommitStatus({
+              ...context.repo,
+              context: '/pm-release',
+              sha: SHA,
+              state: 'success',
+              description: 'Postman release ' + RELEASE_NAME + ' created successfully',
+              target_url: log_url
+            })
             
             const commentBody = `\
             ### Postman release created successfully :tada:
@@ -246,11 +269,11 @@ jobs:
         env:
           REF: ${{ needs.prechecks.outputs.ref }}
           message: ${{steps.validate_params.outputs.error}}
-          
+          SHA: ${{ needs.prechecks.outputs.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |              
-            const { REF, message } = process.env;
+            const { REF, message, SHA } = process.env;
             const log_url = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
 
             if (message === null || message === '') {
@@ -265,6 +288,15 @@ jobs:
                 body: errorMessage
               })
 
+              // set commit status to failure
+              await github.repos.createCommitStatus({
+                ...context.repo,
+                context: '/pm-release',
+                sha: SHA,
+                state: 'failure',
+                description: 'Crating Postman release ' + RELEASE_NAME + ' failed',
+                target_url: log_url
+              })
 
             await github.reactions.createForIssueComment({
               ...context.repo,
