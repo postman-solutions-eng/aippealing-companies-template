@@ -213,8 +213,8 @@ jobs:
         run: |
             git config --local user.email "no-reply@postman.com"
             git config --local user.name "Postman Release Manager"
-            export RELEASE_TAG= "postman-releases/${RELEASE_NAME}"
-            export RELEASE_MESSAGE = "Postman release ${RELEASE_NAME} at ${version_link}\n${RELEASE_NOTES}"
+            export RELEASE_TAG="postman-releases/${RELEASE_NAME}"
+            export RELEASE_MESSAGE="Postman release ${RELEASE_NAME} at ${version_link}\n${RELEASE_NOTES}"
             git tag -a "$RELEASE_TAG" -m "$RELEASE_MESSAGE"
             git push origin "$RELEASE_TAG"
 
