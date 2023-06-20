@@ -117,13 +117,13 @@ jobs:
             // check if comment starts with '/pm-release' and is only followed by whitespaces
             const regexCommandWithoutParameters = /^\/pm-release\s*$/
 
-            // check if comment starts with '/pm-create' and is followed by release notes in double quotes
+            // check if comment starts with '/pm-release' and is followed by release notes in double quotes
             const regexCommandWithReleaseNotes = /^\/pm-release\s+"([^"]*)"\s*$/
 
-            // check if comment starts with '/pm-create' and is followed by a release name with only alphanumeric characters and '-' and '_'
+            // check if comment starts with '/pm-release' and is followed by a release name with only alphanumeric characters and '-' and '_'
             const regexCommandWithReleaseName = /^\/pm-release\s+([a-zA-Z0-9-_]*)\s*$/
 
-            // check if comment starts with '/pm-create', is followed by a branch name with only alpha numeric characters and '-' and "_" and the followed by whitespaces and then a valid DDL
+            // check if comment starts with '/pm-release', is followed by a release name with only alpha numeric characters and '-' and "_" and the followed by whitespaces and then valid release notes in double quotes
             const regexCommandWithRelaseNameAndNotes = /^\/pm-release\s+([a-zA-Z0-9-_]+)\s*"([^"]*)"\s*$/
             
             RELEASE_NAME = REF
@@ -214,7 +214,7 @@ jobs:
             git config --local user.email "no-reply@postman.com"
             git config --local user.name "Postman Release Manager"
             export RELEASE_TAG="postman-releases/${RELEASE_NAME}"
-            export RELEASE_MESSAGE="Postman release ${RELEASE_NAME}"$'\n'"Release-Link: ${version_link}"$'\n'"${RELEASE_NOTES}"
+            export RELEASE_MESSAGE="Postman release ${RELEASE_NAME}"$'\n\n'"Release-Link: ${version_link}"
             git tag -a "$RELEASE_TAG" -m "$RELEASE_MESSAGE"
             git push origin "$RELEASE_TAG"
         shell: bash
