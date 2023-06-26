@@ -17,7 +17,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API contract tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}"
+          postman collection run "${{ github.workspace }}/postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${{vars.POSTMAN_INTEGRATION_ID}}-${{ github.run_id }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}"
       - name: Run API Integration tests
         run: |
           postman collection run "${{ secrets.POSTMAN_INTEGRATION_TESTS_COLLECTION }}" -e "${{ secrets.POSTMAN_ENV_PROD }}" --iteration-data "data/companies.csv"
