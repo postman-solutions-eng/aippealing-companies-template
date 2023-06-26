@@ -129,6 +129,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "0b42ee99-195b-4e79-952d-925700a4f6e9",
 								"exec": [
 									"const minApiCount = Number(pm.environment.get('env-minApiCount'));\r",
 									"const maxApiCount = Number(pm.environment.get('env-maxApiCount'));\r",
@@ -146,8 +147,7 @@
 									"\r",
 									"pm.collectionVariables.set('coll-apiIds', JSON.stringify(apiIds));"
 								],
-								"type": "text/javascript",
-								"id": "0b42ee99-195b-4e79-952d-925700a4f6e9"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -168,7 +168,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.getpostman.com/apis?workspace={{env-workspaceId}}",
+							"raw": "https://api.getpostman.com/apis?workspace={{env-workspaceId}}&name=companies",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -182,6 +182,11 @@
 								{
 									"key": "workspace",
 									"value": "{{env-workspaceId}}"
+								},
+								{
+									"key": "name",
+									"value": "companies",
+									"type": "text"
 								}
 							]
 						}
