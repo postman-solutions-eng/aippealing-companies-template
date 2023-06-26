@@ -75,12 +75,12 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run Mock API tests on preview mock server if branch is not main
         if: github.ref != 'refs/heads/main'
-        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" --iteration-data "data/companies.csv"
+        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK }}" --integration-id "${POSTMAN_INTEGRATION_ID}-${{ github.run_id }}" --iteration-data "data/companies.csv"
       - name: Run Mock API tests on staging mock server if branch is main
         if: github.ref == 'refs/heads/main'
-        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK_STAGING }}" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" --iteration-data "data/companies.csv"
+        run: postman collection run "${{ github.workspace }}/postman/collections/Governance Checks.json" -e "${{ secrets.POSTMAN_ENV_MOCK_STAGING }}" --integration-id "${POSTMAN_INTEGRATION_ID}-${{ github.run_id }}" --iteration-data "data/companies.csv"
       - name: Check API for security and compliance
-        run: postman api lint --integration-id 129431
+        run: postman api lint --integration-id ${POSTMAN_INTEGRATION_ID}
       # if branch is main, wait for staging environment to be ready
       - name: Wait for staging env to be ready
         if: github.ref == 'refs/heads/main'
@@ -96,7 +96,7 @@ jobs:
       - name: Run Contract tests on staging env
         if: github.ref == 'refs/heads/main'
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${{secrets.POSTMAN_INTEGRATION_ID_PREFIX}}-${{ github.run_id }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}" --env-var "env-server=https://aippealing-companies-staging.herokuapp.com"
+          postman collection run "${{ github.workspace }}/postman/collections/(Generator) Contract Tests - OAS3.json" --integration-id "${POSTMAN_INTEGRATION_ID}-${{ github.run_id }}" -e "${{ secrets.POSTMAN_ENV_CONTRACT_TESTING }}" --env-var "env-server=https://aippealing-companies-staging.herokuapp.com"
           
       # if branch is main, run integration tests on staging environment
       - name: Run Integration tests on staging env
