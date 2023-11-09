@@ -31,8 +31,8 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
 
       var token = xApiKey;
 
-      // get environment variable size, if not set, set it to 256x256
-      var size = process.env.size || "256x256";
+      
+      var size = "1024x1024";
 
       var company = companyId;
 
@@ -145,7 +145,8 @@ const getCompany = ({ companyId, material, mode, xApiKey }) => new Promise(
           body: JSON.stringify({
             "prompt": prompt,
             "n": 1,
-            "size": size
+            "size": size,
+            "model": "dall-e-3"
           })
 
         };
