@@ -260,7 +260,8 @@
 									"  });",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -301,7 +302,7 @@
 							"variable": [
 								{
 									"key": "companyId",
-									"value": "lexus",
+									"value": "allianz",
 									"description": "(Required) Company ID"
 								}
 							]
