@@ -109,7 +109,7 @@ paths:
                     name: "allianz"
                     city: "Munich, Germany"
                     motto: "Empowering people to live a better life"
-                    description: "1 of the world's largest insurance companies, operating in more than 70 countries"
+                    description: "one of the world's largest insurance companies, operating in more than 70 countries"
                     associations:
                       - name: "Insurance products, including life, health, property"
                         type: "product"
