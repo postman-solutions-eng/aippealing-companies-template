@@ -105,16 +105,17 @@ paths:
                 schema:
                     $ref: '#/components/schemas/Company'
                 example:
-                  id: yousendmeflowers
-                  name: 'Fleurop / yousendmeflowers / main'
-                  city: '{{$randomCity}}'
-                  motto: '{{$randomCatchPhrase}}'
-                  description: 'Fleurop is a flower delivery service with a network of florists in 140 countries. YouSendMeFlowers is a similar service in the US. Main is a flower delivery service in the Netherlands.'
-                  associations:
-                    - name: 'Flowers'
-                      type: 'product'
-                      material: 'lego'
-                      url: 'https://user-images.githubusercontent.com/1872314/208254526-fe40f349-5456-4549-b72d-e49fe341f8e7.png'
+                    id: "allianz"
+                    name: "allianz"
+                    city: "Munich, Germany"
+                    motto: "Empowering people to live a better life"
+                    description: "1 of the world's largest insurance companies, operating in more than 70 countries"
+                    associations:
+                      - name: "Insurance products, including life, health, property"
+                        type: "product"
+                        url: "https://github.com/user-attachments/assets/f5de062a-c19d-4903-bf7c-0e734e14e87d"
+                        material: "lego"
+                  
         '404':
           description: Not Found
           content:
