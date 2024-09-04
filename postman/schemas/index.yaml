@@ -155,6 +155,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Companies'
               example:
+                - id: 'allianz'
+                  name: 'Allianz'
+                  city: 'Munich'
+                  motto: 'Together. Stronger.'
+                  description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
+                  associations:
+                    - name: 'Allianz Arena'
+                      type: 'product'
+                      material: 'chocolate'
+                      url: "https://user-images.githubusercontent.com/1872314/208270631-87b3c79c-c6e8-47dd-9cf2-52451989b83b.png"
                 - id: yousendmeflowers
                   name: 'Fleurop / yousendmeflowers / main'
                   city: '{{$randomCity}}'
@@ -189,16 +199,6 @@ paths:
                       type: 'product'
                       material: 'chocolate'
                       url: 'https://user-images.githubusercontent.com/1872314/208254307-d1971475-31aa-4c10-ac8d-7b907579438d.png'
-                - id: 'allianz'
-                  name: 'Allianz'
-                  city: 'Munich'
-                  motto: 'Together. Stronger.'
-                  description: 'Allianz SE is a German multinational financial services company headquartered in Munich, Bavaria. It is the largest insurance company in the world by revenue.'
-                  associations:
-                    - name: 'Allianz Arena'
-                      type: 'product'
-                      material: 'chocolate'
-                      url: "https://user-images.githubusercontent.com/1872314/208270631-87b3c79c-c6e8-47dd-9cf2-52451989b83b.png"
                 - id: "becks"
                   name: "Becks"
                   city: "Bremen"
