@@ -56,15 +56,15 @@
 							"        // skip the next request in the collection (fuzzy search) and go directly to GitHub reporting if GitHub username is set",
 							"",
 							"        if (pm.variables.get(\"GITHUB_USERNAME\")) {",
-							"            postman.setNextRequest(\"Update GitHub PR / Issue\");",
+							"            pm.execution.setNextRequest(\"Update GitHub PR / Issue\");",
 							"        } else {",
-							"            postman.setNextRequest(null);",
+							"            pm.execution.setNextRequest(null);",
 							"        }",
 							"  ",
 							"    } else {",
 							"        // if mode was fuzzy and we did not expect a 200, we would set the next request to null",
 							"        if (pm.request.url.query.get('mode') === 'fuzzy') {",
-							"            postman.setNextRequest(null);",
+							"            pm.execution.setNextRequest(null);",
 							"        }",
 							"    }",
 							"  });",
@@ -78,8 +78,8 @@
 					"script": {
 						"id": "95bb6ebc-67b7-4765-bb37-6dd8a429df29",
 						"exec": [
-							"if (globals.previousRequest != undefined) {",
-							"   let incomingPayload = JSON.parse(globals.previousRequest).data",
+							"if (pm.globals.previousRequest != undefined) {",
+							"   let incomingPayload = JSON.parse(pm.globals.previousRequest).data",
 							"    if (incomingPayload.company != null && incomingPayload.material != null) {",
 							"        pm.collectionVariables.set(\"company\", incomingPayload.company);",
 							"        pm.collectionVariables.set(\"material\", incomingPayload.material);",
@@ -185,7 +185,7 @@
 							"",
 							"// bail out if tests did not go through or there is no GITHUB_USERNAME set",
 							"if (pass != totalToPass || pm.variables.get(\"GITHUB_USERNAME\") == undefined) {",
-							"    postman.setNextRequest(null);",
+							"    pm.execution.setNextRequest(null);",
 							"}"
 						],
 						"type": "text/javascript"
