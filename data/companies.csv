@@ -1,4 +1,5 @@
 company,material,mode,expectedStatus
+allianz,lego,exact,200
 becks,gold,exact,200
 fleurop,chocolate,exact,404
 fleurop,chocolate,fuzzy,200
