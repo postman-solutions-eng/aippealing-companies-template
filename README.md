@@ -39,6 +39,16 @@ Follow the [generated API documentation](https://auto-demo.postmansolutions.com)
 
 <img width="1290" alt="image" src="https://user-images.githubusercontent.com/1872314/208407634-c0a48387-56cc-44f1-9c16-59041a32e903.png">
 
+## Issue Analysis Script
+
+A Python script named `issue_analysis.py` has been added to the repository to scan, analyze issues, and identify referenced Postman environments and mentioned companies. To use the script, navigate to the `scripts` directory and run:
+
+```bash
+python issue_analysis.py
+```
+
+The script utilizes the GitHub API to fetch issue data and analyze it. It outputs a list of Postman environments and companies mentioned in issue comments.
+
 # OpenAPI Generated JavaScript/Express Server
 
 ## Overview
@@ -75,7 +85,7 @@ npm start
 1. API documentation, and to check the available endpoints:
 http://localhost:3000/api-docs/. To
 2. Download the openapi.yaml document: http://localhost:3000/openapi.
-3.  Every call to an endpoint that was defined in the openapi document will return a 200 and a list of all the parameters and objects that were sent in the request.
+3.  Every call to an endpoint that was defined in the openapi.yaml document will return a 200 and a list of all the parameters and objects that were sent in the request.
 4. Endpoints that require security need to have security handlers configured before they can return a successful response. At this point they will return [ a response code of 401](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401).
 5. ##### At this stage the server does not support document body sent in xml format.
 
