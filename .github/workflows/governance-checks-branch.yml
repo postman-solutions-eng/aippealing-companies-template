@@ -29,23 +29,27 @@ jobs:
           cmd: yq '.paths./companies.get.responses.'200'.content.application/json.example[].id' postman/schemas/index.yaml
       
       - name: Check if first company example is in all examples list
+        env:
+          FIRST_EXAMPLE: ${{ steps.get_first_example.outputs.result }}
+          ALL_EXAMPLES: ${{ steps.get_all_examples.outputs.result }}
         run: |
-          echo "First example in /companies/{:id} endpoint : ${{ steps.get_first_example.outputs.result }}"
-          echo "All examples: ${{ steps.get_all_examples.outputs.result }}"
-          if [[ "${{ steps.get_all_examples.outputs.result }}" =~ "${{ steps.get_first_example.outputs.result }}" ]]; then
+          echo "First example in /companies/{:id} endpoint : $FIRST_EXAMPLE"
+          echo "All examples: $ALL_EXAMPLES"
+          if [[ "$ALL_EXAMPLES" =~ "$FIRST_EXAMPLE" ]]; then
             echo "First example is in all examples list"
           else
             echo "First example is not in all examples list"
             exit 1
           fi
-      
+
       - name: Check if all company examples are in data/companies.csv
         if: false
+        env:
+          ALL_EXAMPLES: ${{ steps.get_all_examples.outputs.result }}
         run: |
           allCompanies=$(cat data/companies.csv)
-          allExamples="${{ steps.get_all_examples.outputs.result }}"
           echo "All companies in data/companies.csv: $allCompanies"
-          for company in $allExamples; do
+          for company in $ALL_EXAMPLES; do
             if [[ "$allCompanies" =~ "$company" ]]; then
               echo "Company $company is in data/companies.csv"
             else
@@ -56,11 +60,12 @@ jobs:
 
       - name: Check if all materials are in data/companies.csv
         if: false
+        env:
+          ALL_MATERIALS: ${{ steps.get_all_materials.outputs.result }}
         run: |
           allCompanies=$(cat data/companies.csv)
-          allMaterials="${{ steps.get_all_materials.outputs.result }}"
           echo "All companies in data/companies.csv: $allCompanies"
-          for material in $allMaterials; do
+          for material in $ALL_MATERIALS; do
             if [[ "$allCompanies" =~ "$material" ]]; then
               echo "Material $material is in data/companies.csv"
             else
