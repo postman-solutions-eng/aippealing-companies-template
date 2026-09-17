@@ -13,6 +13,7 @@ jobs:
       eyes: ${{steps.prechecks.outputs.eyes}}
       sha: ${{steps.prechecks.outputs.sha}}
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
     - name: Check permissions and PR ref
       id: prechecks
@@ -101,6 +102,7 @@ jobs:
     if: startsWith(github.event.comment.body, '/pm-release')
     needs: [prechecks]
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Validating parameters
         id: validate_params

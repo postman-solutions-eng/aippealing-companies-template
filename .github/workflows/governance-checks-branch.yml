@@ -7,6 +7,7 @@ jobs:
   governance-tests:
     name: Governance checks and staging
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - name: Get first example of company id in /companies/{:id} endpoint
