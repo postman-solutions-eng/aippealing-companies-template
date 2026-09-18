@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - name: Get first example of company id in /companies/{:id} endpoint
         id: get_first_example
         uses: mikefarah/yq@master
