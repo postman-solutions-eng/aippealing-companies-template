@@ -6,6 +6,7 @@ jobs:
   integration-tests-preview:
     name: Integration testing on preview env
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
         with:
